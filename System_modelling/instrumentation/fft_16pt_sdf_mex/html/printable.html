@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<h1>Instrumentation Results for fft_16pt_sdf_mex</h1>
+<h2>Summary</h2>
+<p>To re-create this report:</p>
+<pre>  showInstrumentationResults fft_16pt_sdf_mex -proposeFL -defaultDT numerictype(1,32)</pre>
+
+<p>MEX-function name:</p>
+<pre>fft_16pt_sdf_mex</pre>
+<p>Timestamp:</p>
+<pre>Thu Aug  6 15:06:50 2026</pre>
+<p>To open this report from the MATLAB command line:</p>
+<pre> web('-browser','E:\ADI_intern\Final_Project\System_modelling\instrumentation\fft_16pt_sdf_mex\html\printable.html')</pre>
+
+
+<h2>Function fft_16pt_sdf </h2>
+
+<pre>
+function [out_r, out_i] = fft_16pt_sdf(test_in_r, test_in_i, num_cycles, T) %#codegen
+% T: Types table structure containing specific fixed-point variable definitions
+
+% Floating-point twiddle factors (cast to target type)
+W16 = cast(exp(-1i * 2*pi * (0:7) / 16), 'like', T.W16);
+W8  = cast(exp(-1i * 2*pi * (0:3) / 8),  'like', T.W8);
+W4  = cast(exp(-1i * 2*pi * (0:1) / 4),  'like', T.W4);
+
+% Initialize shift registers using the types table
+sr1_r = zeros(1, 8, 'like', T.sr1_r); sr1_i = zeros(1, 8, 'like', T.sr1_i);
+sr2_r = zeros(1, 4, 'like', T.sr2_r); sr2_i = zeros(1, 4, 'like', T.sr2_i);
+sr3_r = zeros(1, 2, 'like', T.sr3_r); sr3_i = zeros(1, 2, 'like', T.sr3_i);
+sr4_r = zeros(1, 1, 'like', T.sr4_r); sr4_i = zeros(1, 1, 'like', T.sr4_i);
+
+out_r = zeros(num_cycles, 1, 'like', T.out_r);
+out_i = zeros(num_cycles, 1, 'like', T.out_i);
+
+for clk = 0 : num_cycles - 1
+    
+    in_r = cast(test_in_r(clk + 1), 'like', T.in_r);
+    in_i = cast(test_in_i(clk + 1), 'like', T.in_i);
+    
+    % =====================================================================
+    % STAGE 1 (Delay = 8)
+    % =====================================================================
+    sel1 = bitget(clk, 4);
+    
+    stage1_add_out_r = cast(sr1_r(end) + in_r, 'like', T.stage1_add_out_r);
+    stage1_add_out_i = cast(sr1_i(end) + in_i, 'like', T.stage1_add_out_i);
+    stage1_sub_out_r = cast(sr1_r(end) - in_r, 'like', T.stage1_sub_out_r);
+    stage1_sub_out_i = cast(sr1_i(end) - in_i, 'like', T.stage1_sub_out_i);
+    
+    if sel1 == 0
+        % Outputting Delayed SUB -> Must apply Twiddle Factor
+        mux1_top_r = cast(in_r,       'like', T.sr1_r);
+        mux1_top_i = cast(in_i,       'like', T.sr1_i);
+        mux1_bot_r = cast(sr1_r(end), 'like', T.stage1_add_out_r); 
+        mux1_bot_i = cast(sr1_i(end), 'like', T.stage1_add_out_i);
+        
+        idx = mod(clk, 8) + 1;
+        tw1_r = cast(real(W16(idx)), 'like', T.tw1_r); 
+        tw1_i = cast(imag(W16(idx)), 'like', T.tw1_i);
+    else
+        % Outputting Current ADD -> Twiddle is exactly 1
+        mux1_top_r = cast(stage1_sub_out_r, 'like', T.sr1_r); 
+        mux1_top_i = cast(stage1_sub_out_i, 'like', T.sr1_i);
+        mux1_bot_r = cast(stage1_add_out_r, 'like', T.stage1_add_out_r); 
+        mux1_bot_i = cast(stage1_add_out_i, 'like', T.stage1_add_out_i);
+        
+        tw1_r = cast(1, 'like', T.tw1_r); 
+        tw1_i = cast(0, 'like', T.tw1_i);
+    end
+    
+    sr1_r = [mux1_top_r, sr1_r(1:end-1)];
+    sr1_i = [mux1_top_i, sr1_i(1:end-1)];
+    
+    stage1_mult_out_rxr = cast(mux1_bot_r * tw1_r, 'like', T.stage1_mult_out_rxr);
+    stage1_mult_out_ixi = cast(mux1_bot_i * tw1_i, 'like', T.stage1_mult_out_ixi);
+    stage1_mult_out_ixr = cast(mux1_bot_i * tw1_r, 'like', T.stage1_mult_out_ixr);
+    stage1_mult_out_rxi = cast(mux1_bot_r * tw1_i, 'like', T.stage1_mult_out_rxi);
+    
+    stage1_mult_add_out_r = cast(stage1_mult_out_rxr - stage1_mult_out_ixi, 'like', T.stage1_mult_add_out_r);
+    stage1_mult_add_out_i = cast(stage1_mult_out_ixr + stage1_mult_out_rxi, 'like', T.stage1_mult_add_out_i);
+
+    % =====================================================================
+    % STAGE 2 (Delay = 4)
+    % =====================================================================
+    sel2 = bitget(clk, 3);
+    
+    stage2_add_out_r = cast(sr2_r(end) + stage1_mult_add_out_r, 'like', T.stage2_add_out_r);
+    stage2_add_out_i = cast(sr2_i(end) + stage1_mult_add_out_i, 'like', T.stage2_add_out_i);
+    stage2_sub_out_r = cast(sr2_r(end) - stage1_mult_add_out_r, 'like', T.stage2_sub_out_r);
+    stage2_sub_out_i = cast(sr2_i(end) - stage1_mult_add_out_i, 'like', T.stage2_sub_out_i);
+    
+    if sel2 == 0
+        % Outputting Delayed SUB -> Must apply Twiddle Factor
+        mux2_top_r = cast(stage1_mult_add_out_r, 'like', T.sr2_r); 
+        mux2_top_i = cast(stage1_mult_add_out_i, 'like', T.sr2_i);
+        mux2_bot_r = cast(sr2_r(end),            'like', T.stage2_add_out_r);
+        mux2_bot_i = cast(sr2_i(end),            'like', T.stage2_add_out_i);
+        
+        idx = mod(clk, 4) + 1;
+        tw2_r = cast(real(W8(idx)), 'like', T.tw2_r);  
+        tw2_i = cast(imag(W8(idx)), 'like', T.tw2_i);
+    else
+        % Outputting Current ADD -> Twiddle is exactly 1
+        mux2_top_r = cast(stage2_sub_out_r, 'like', T.sr2_r);      
+        mux2_top_i = cast(stage2_sub_out_i, 'like', T.sr2_i);
+        mux2_bot_r = cast(stage2_add_out_r, 'like', T.stage2_add_out_r);      
+        mux2_bot_i = cast(stage2_add_out_i, 'like', T.stage2_add_out_i);
+        
+        tw2_r = cast(1, 'like', T.tw2_r);      
+        tw2_i = cast(0, 'like', T.tw2_i);
+    end
+    
+    sr2_r = [mux2_top_r, sr2_r(1:end-1)];
+    sr2_i = [mux2_top_i, sr2_i(1:end-1)];
+    
+    stage2_mult_out_rxr = cast(mux2_bot_r * tw2_r, 'like', T.stage2_mult_out_rxr);
+    stage2_mult_out_ixi = cast(mux2_bot_i * tw2_i, 'like', T.stage2_mult_out_ixi);
+    stage2_mult_out_ixr = cast(mux2_bot_i * tw2_r, 'like', T.stage2_mult_out_ixr);
+    stage2_mult_out_rxi = cast(mux2_bot_r * tw2_i, 'like', T.stage2_mult_out_rxi);
+    
+    stage2_mult_add_out_r = cast(stage2_mult_out_rxr - stage2_mult_out_ixi, 'like', T.stage2_mult_add_out_r);
+    stage2_mult_add_out_i = cast(stage2_mult_out_ixr + stage2_mult_out_rxi, 'like', T.stage2_mult_add_out_i);
+
+    % =====================================================================
+    % STAGE 3 (Delay = 2)
+    % =====================================================================
+    sel3 = bitget(clk, 2);
+    
+    stage3_add_out_r = cast(sr3_r(end) + stage2_mult_add_out_r, 'like', T.stage3_add_out_r);
+    stage3_add_out_i = cast(sr3_i(end) + stage2_mult_add_out_i, 'like', T.stage3_add_out_i);
+    stage3_sub_out_r = cast(sr3_r(end) - stage2_mult_add_out_r, 'like', T.stage3_sub_out_r);
+    stage3_sub_out_i = cast(sr3_i(end) - stage2_mult_add_out_i, 'like', T.stage3_sub_out_i);
+    
+    if sel3 == 0
+        % Outputting Delayed SUB -> Must apply Twiddle Factor
+        mux3_top_r = cast(stage2_mult_add_out_r, 'like', T.sr3_r); 
+        mux3_top_i = cast(stage2_mult_add_out_i, 'like', T.sr3_i);
+        mux3_bot_r = cast(sr3_r(end),            'like', T.stage3_add_out_r);            
+        mux3_bot_i = cast(sr3_i(end),            'like', T.stage3_add_out_i);
+        
+        idx = mod(clk, 2) + 1;
+        tw3_r = cast(real(W4(idx)), 'like', T.tw3_r);              
+        tw3_i = cast(imag(W4(idx)), 'like', T.tw3_i);
+    else
+        % Outputting Current ADD -> Twiddle is exactly 1
+        mux3_top_r = cast(stage3_sub_out_r, 'like', T.sr3_r);      
+        mux3_top_i = cast(stage3_sub_out_i, 'like', T.sr3_i);
+        mux3_bot_r = cast(stage3_add_out_r, 'like', T.stage3_add_out_r);      
+        mux3_bot_i = cast(stage3_add_out_i, 'like', T.stage3_add_out_i);
+        
+        tw3_r = cast(1, 'like', T.tw3_r);      
+        tw3_i = cast(0, 'like', T.tw3_i);
+    end
+    
+    sr3_r = [mux3_top_r, sr3_r(1:end-1)];
+    sr3_i = [mux3_top_i, sr3_i(1:end-1)];
+    
+    stage3_mult_out_rxr = cast(mux3_bot_r * tw3_r, 'like', T.stage3_mult_out_rxr);
+    stage3_mult_out_ixi = cast(mux3_bot_i * tw3_i, 'like', T.stage3_mult_out_ixi);
+    stage3_mult_out_ixr = cast(mux3_bot_i * tw3_r, 'like', T.stage3_mult_out_ixr);
+    stage3_mult_out_rxi = cast(mux3_bot_r * tw3_i, 'like', T.stage3_mult_out_rxi);
+    
+    stage3_mult_add_out_r = cast(stage3_mult_out_rxr - stage3_mult_out_ixi, 'like', T.stage3_mult_add_out_r);
+    stage3_mult_add_out_i = cast(stage3_mult_out_ixr + stage3_mult_out_rxi, 'like', T.stage3_mult_add_out_i);
+
+    % =====================================================================
+    % STAGE 4 (Delay = 1)
+    % =====================================================================
+    sel4 = bitget(clk, 1);
+    
+    stage4_add_out_r = cast(sr4_r(end) + stage3_mult_add_out_r, 'like', T.stage4_add_out_r);
+    stage4_add_out_i = cast(sr4_i(end) + stage3_mult_add_out_i, 'like', T.stage4_add_out_i);
+    stage4_sub_out_r = cast(sr4_r(end) - stage3_mult_add_out_r, 'like', T.stage4_sub_out_r);
+    stage4_sub_out_i = cast(sr4_i(end) - stage3_mult_add_out_i, 'like', T.stage4_sub_out_i);
+    
+    if sel4 == 0
+        mux4_top_r = cast(stage3_mult_add_out_r, 'like', T.sr4_r); 
+        mux4_top_i = cast(stage3_mult_add_out_i, 'like', T.sr4_i);
+        mux4_bot_r = cast(sr4_r(end),            'like', T.stage4_add_out_r);            
+        mux4_bot_i = cast(sr4_i(end),            'like', T.stage4_add_out_i);
+    else
+        mux4_top_r = cast(stage4_sub_out_r,      'like', T.sr4_r);      
+        mux4_top_i = cast(stage4_sub_out_i,      'like', T.sr4_i);
+        mux4_bot_r = cast(stage4_add_out_r,      'like', T.stage4_add_out_r);      
+        mux4_bot_i = cast(stage4_add_out_i,      'like', T.stage4_add_out_i);
+    end
+    
+    % The final stage never requires a twiddle multiplier mathematically
+    tw4_r = cast(1, 'like', T.tw4_r); 
+    tw4_i = cast(0, 'like', T.tw4_i);
+    
+    sr4_r = [mux4_top_r, sr4_r(1:end-1)];
+    sr4_i = [mux4_top_i, sr4_i(1:end-1)];
+    
+    stage4_mult_out_rxr = cast(mux4_bot_r * tw4_r, 'like', T.stage4_mult_out_rxr);
+    stage4_mult_out_ixi = cast(mux4_bot_i * tw4_i, 'like', T.stage4_mult_out_ixi);
+    stage4_mult_out_ixr = cast(mux4_bot_i * tw4_r, 'like', T.stage4_mult_out_ixr);
+    stage4_mult_out_rxi = cast(mux4_bot_r * tw4_i, 'like', T.stage4_mult_out_rxi);
+    
+    stage4_mult_add_out_r = cast(stage4_mult_out_rxr - stage4_mult_out_ixi, 'like', T.stage4_mult_add_out_r);
+    stage4_mult_add_out_i = cast(stage4_mult_out_ixr + stage4_mult_out_rxi, 'like', T.stage4_mult_add_out_i);
+    
+    % =====================================================================
+    % OUTPUT CAPTURE
+    % =====================================================================
+    out_r(clk+1) = cast(stage4_mult_add_out_r, 'like', T.out_r);
+    out_i(clk+1) = cast(stage4_mult_add_out_i, 'like', T.out_i);
+end
+
+end
+</pre>
+<table style="border-collapse: collapse; border: solid;" border="1">
+<caption><b>Logged Variables for fft_16pt_sdf</b></caption>
+<tr><th>Variable</th><th>Type</th><th>Size</th><th>Class</th><th>Complex</th><th>Proposed<br>Signedness</th><th>Proposed<br>WL</th><th>Proposed<br>FL</th><th>Always<br>Whole Number</th><th>SimMin</th><th>SimMax</th></tr>
+<tr><td><code>W16</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;8</code></td><td><code>double</code></td><td><code>Yes</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>30</code></td><td><code>No</code></td><td><code>-1</code></td><td><code>1</code></td></tr>
+<tr><td><code>W4</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;2</code></td><td><code>double</code></td><td><code>Yes</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>30</code></td><td><code>No</code></td><td><code>-1</code></td><td><code>1</code></td></tr>
+<tr><td><code>W8</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;4</code></td><td><code>double</code></td><td><code>Yes</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>30</code></td><td><code>No</code></td><td><code>-1</code></td><td><code>1</code></td></tr>
+<tr><td><code>clk</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>0</code></td><td><code><b>Yes</b></code></td><td><code>0</code></td><td><code>31</code></td></tr>
+<tr><td><code>idx</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>0</code></td><td><code><b>Yes</b></code></td><td><code>1</code></td><td><code>8</code></td></tr>
+<tr><td><code>in_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>29</code></td><td><code>No</code></td><td><code>-3.2757238349212967</code></td><td><code>3.3004552985532802</code></td></tr>
+<tr><td><code>in_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>29</code></td><td><code>No</code></td><td><code>-3.0759034205474283</code></td><td><code>3.1132750454258082</code></td></tr>
+<tr><td><code>mux1_bot_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-4.746853366080265</code></td><td><code>5.030617526702274</code></td></tr>
+<tr><td><code>mux1_bot_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-6.064756246187554</code></td><td><code>5.0353644974055705</code></td></tr>
+<tr><td><code>mux1_top_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-4.134618331528175</code></td><td><code>5.030617526702274</code></td></tr>
+<tr><td><code>mux1_top_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-4.257200772658639</code></td><td><code>3.9224200661287667</code></td></tr>
+<tr><td><code>mux2_bot_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-7.642544044072222</code></td><td><code>6.64175849096425</code></td></tr>
+<tr><td><code>mux2_bot_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-6.519518991066143</code></td><td><code>5.812586597799697</code></td></tr>
+<tr><td><code>mux2_top_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-7.642544044072222</code></td><td><code>6.64175849096425</code></td></tr>
+<tr><td><code>mux2_top_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-6.519518991066143</code></td><td><code>5.812586597799697</code></td></tr>
+<tr><td><code>mux3_bot_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-11.203888264249066</code></td><td><code>9.996997955948357</code></td></tr>
+<tr><td><code>mux3_bot_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-10.11951629353716</code></td><td><code>8.46327362985362</code></td></tr>
+<tr><td><code>mux3_top_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-9.68150990290143</code></td><td><code>9.996997955948357</code></td></tr>
+<tr><td><code>mux3_top_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-10.11951629353716</code></td><td><code>7.938775966753355</code></td></tr>
+<tr><td><code>mux4_bot_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-15.96157105067794</code></td><td><code>12.902179073728872</code></td></tr>
+<tr><td><code>mux4_bot_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-14.986475242577686</code></td><td><code>12.921069152203126</code></td></tr>
+<tr><td><code>mux4_top_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-11.18665521443457</code></td><td><code>12.902179073728872</code></td></tr>
+<tr><td><code>mux4_top_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-11.496861212491375</code></td><td><code>11.593312507228354</code></td></tr>
+<tr><td><code>num_cycles</code></td><td><code>Input</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>0</code></td><td><code><b>Yes</b></code></td><td><code>32</code></td><td><code>32</code></td></tr>
+<tr><td><code>out_i</code></td><td><code>Output</code></td><td><code><b>:</b>?&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-15.96157105067794</code></td><td><code>12.902179073728872</code></td></tr>
+<tr><td><code>out_r</code></td><td><code>Output</code></td><td><code><b>:</b>?&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-14.986475242577686</code></td><td><code>12.921069152203126</code></td></tr>
+<tr><td><code>sel1</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>0</code></td><td><code><b>Yes</b></code></td><td><code>0</code></td><td><code>1</code></td></tr>
+<tr><td><code>sel2</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>0</code></td><td><code><b>Yes</b></code></td><td><code>0</code></td><td><code>1</code></td></tr>
+<tr><td><code>sel3</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>0</code></td><td><code><b>Yes</b></code></td><td><code>0</code></td><td><code>1</code></td></tr>
+<tr><td><code>sel4</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>0</code></td><td><code><b>Yes</b></code></td><td><code>0</code></td><td><code>1</code></td></tr>
+<tr><td><code>sr1_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;8</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-4.134618331528175</code></td><td><code>5.030617526702274</code></td></tr>
+<tr><td><code>sr1_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;8</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-4.257200772658639</code></td><td><code>3.9224200661287667</code></td></tr>
+<tr><td><code>sr2_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;4</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-7.642544044072222</code></td><td><code>6.64175849096425</code></td></tr>
+<tr><td><code>sr2_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;4</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-6.519518991066143</code></td><td><code>5.812586597799697</code></td></tr>
+<tr><td><code>sr3_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;2</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-9.68150990290143</code></td><td><code>9.996997955948357</code></td></tr>
+<tr><td><code>sr3_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;2</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-10.11951629353716</code></td><td><code>7.938775966753355</code></td></tr>
+<tr><td><code>sr4_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-11.18665521443457</code></td><td><code>12.902179073728872</code></td></tr>
+<tr><td><code>sr4_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-11.496861212491375</code></td><td><code>11.593312507228354</code></td></tr>
+<tr><td><code>stage1_add_out_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-4.746853366080265</code></td><td><code>5.030617526702274</code></td></tr>
+<tr><td><code>stage1_add_out_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-6.064756246187554</code></td><td><code>5.0353644974055705</code></td></tr>
+<tr><td><code>stage1_mult_add_out_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-4.746853366080265</code></td><td><code>4.738092463970644</code></td></tr>
+<tr><td><code>stage1_mult_add_out_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-6.064756246187554</code></td><td><code>5.0353644974055705</code></td></tr>
+<tr><td><code>stage1_mult_out_ixi</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>29</code></td><td><code>No</code></td><td><code>-3.8575870535142203</code></td><td><code>3.2377742523574207</code></td></tr>
+<tr><td><code>stage1_mult_out_ixr</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-4.746853366080265</code></td><td><code>4.738092463970644</code></td></tr>
+<tr><td><code>stage1_mult_out_rxi</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>29</code></td><td><code>No</code></td><td><code>-3.6743797436438017</code></td><td><code>3.445268878723137</code></td></tr>
+<tr><td><code>stage1_mult_out_rxr</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-6.064756246187554</code></td><td><code>5.0353644974055705</code></td></tr>
+<tr><td><code>stage1_sub_out_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-4.134618331528175</code></td><td><code>5.030617526702274</code></td></tr>
+<tr><td><code>stage1_sub_out_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-4.257200772658639</code></td><td><code>3.9224200661287667</code></td></tr>
+<tr><td><code>stage2_add_out_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-8.042543975872823</code></td><td><code>6.64175849096425</code></td></tr>
+<tr><td><code>stage2_add_out_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-7.248907700251904</code></td><td><code>7.183764922297238</code></td></tr>
+<tr><td><code>stage2_mult_add_out_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-7.642544044072222</code></td><td><code>7.720440952915226</code></td></tr>
+<tr><td><code>stage2_mult_add_out_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-6.519518991066143</code></td><td><code>5.755578799301029</code></td></tr>
+<tr><td><code>stage2_mult_out_ixi</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-5.213210199995849</code></td><td><code>4.964160392005532</code></td></tr>
+<tr><td><code>stage2_mult_out_ixr</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-7.642544044072222</code></td><td><code>6.0089159714377995</code></td></tr>
+<tr><td><code>stage2_mult_out_rxi</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-5.589768460107482</code></td><td><code>4.86126687722126</code></td></tr>
+<tr><td><code>stage2_mult_out_rxr</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-6.519518991066143</code></td><td><code>5.755578799301029</code></td></tr>
+<tr><td><code>stage2_sub_out_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>28</code></td><td><code>No</code></td><td><code>-7.858923900976128</code></td><td><code>6.64175849096425</code></td></tr>
+<tr><td><code>stage2_sub_out_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-8.04180698433992</code></td><td><code>6.992257068171106</code></td></tr>
+<tr><td><code>stage3_add_out_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-13.480404646948116</code></td><td><code>9.242178759363025</code></td></tr>
+<tr><td><code>stage3_add_out_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-12.825161464821875</code></td><td><code>9.545476219293318</code></td></tr>
+<tr><td><code>stage3_mult_add_out_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-11.203888264249066</code></td><td><code>8.182561286002544</code></td></tr>
+<tr><td><code>stage3_mult_add_out_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-10.11951629353716</code></td><td><code>9.996997955948357</code></td></tr>
+<tr><td><code>stage3_mult_out_ixi</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-9.996997955948357</code></td><td><code>9.68150990290143</code></td></tr>
+<tr><td><code>stage3_mult_out_ixr</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-11.203888264249066</code></td><td><code>8.125685593667352</code></td></tr>
+<tr><td><code>stage3_mult_out_rxi</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-7.938775966753355</code></td><td><code>8.182561286002544</code></td></tr>
+<tr><td><code>stage3_mult_out_rxr</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-10.11951629353716</code></td><td><code>8.46327362985362</code></td></tr>
+<tr><td><code>stage3_sub_out_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-11.355842258093801</code></td><td><code>11.035829632664019</code></td></tr>
+<tr><td><code>stage3_sub_out_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-10.11951629353716</code></td><td><code>9.434464868839004</code></td></tr>
+<tr><td><code>stage4_add_out_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-15.96157105067794</code></td><td><code>12.014015229486674</code></td></tr>
+<tr><td><code>stage4_add_out_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>26</code></td><td><code>No</code></td><td><code>-18.500331458307528</code></td><td><code>14.35349789330279</code></td></tr>
+<tr><td><code>stage4_mult_add_out_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-15.96157105067794</code></td><td><code>12.902179073728872</code></td></tr>
+<tr><td><code>stage4_mult_add_out_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-14.986475242577686</code></td><td><code>12.921069152203126</code></td></tr>
+<tr><td><code>stage4_mult_out_ixi</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>0</code></td><td><code><b>Yes</b></code></td><td><code>0</code></td><td><code>0</code></td></tr>
+<tr><td><code>stage4_mult_out_ixr</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-15.96157105067794</code></td><td><code>12.902179073728872</code></td></tr>
+<tr><td><code>stage4_mult_out_rxi</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>0</code></td><td><code><b>Yes</b></code></td><td><code>0</code></td><td><code>0</code></td></tr>
+<tr><td><code>stage4_mult_out_rxr</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-14.986475242577686</code></td><td><code>12.921069152203126</code></td></tr>
+<tr><td><code>stage4_sub_out_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-15.402666544179258</code></td><td><code>14.445157118189616</code></td></tr>
+<tr><td><code>stage4_sub_out_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>27</code></td><td><code>No</code></td><td><code>-14.088316176865959</code></td><td><code>15.316905766173228</code></td></tr>
+<tr><td><code>test_in_i</code></td><td><code>Input</code></td><td><code>32&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>29</code></td><td><code>No</code></td><td><code>-3.2757238349212967</code></td><td><code>3.3004552985532802</code></td></tr>
+<tr><td><code>test_in_r</code></td><td><code>Input</code></td><td><code>32&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>29</code></td><td><code>No</code></td><td><code>-3.0759034205474283</code></td><td><code>3.1132750454258082</code></td></tr>
+<tr><td><code>tw1_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>31</code></td><td><code>No</code></td><td><code>-1</code></td><td><code>0</code></td></tr>
+<tr><td><code>tw1_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>30</code></td><td><code>No</code></td><td><code>-0.9238795325112867</code></td><td><code>1</code></td></tr>
+<tr><td><code>tw2_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>31</code></td><td><code>No</code></td><td><code>-1</code></td><td><code>0</code></td></tr>
+<tr><td><code>tw2_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>30</code></td><td><code>No</code></td><td><code>-0.7071067811865475</code></td><td><code>1</code></td></tr>
+<tr><td><code>tw3_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>0</code></td><td><code><b>Yes</b></code></td><td><code>-1</code></td><td><code>0</code></td></tr>
+<tr><td><code>tw3_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>30</code></td><td><code>No</code></td><td><code>6.123233995736766e-17</code></td><td><code>1</code></td></tr>
+<tr><td><code>tw4_i</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>0</code></td><td><code><b>Yes</b></code></td><td><code>0</code></td><td><code>0</code></td></tr>
+<tr><td><code>tw4_r</code></td><td><code>Local</code></td><td><code>1&nbsp;x&nbsp;1</code></td><td><code>double</code></td><td><code>No</code></td><td><code>Signed</code></td><td><code>32</code></td><td><code>0</code></td><td><code><b>Yes</b></code></td><td><code>1</code></td><td><code>1</code></td></tr>
+</table>
+</html>
