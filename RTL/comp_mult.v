@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module twiddle_multiplier #(
+module complex_multiplier #(
     parameter STAGE = 1
 )(
     input  wire [2:0]  idx,
