@@ -65,9 +65,10 @@ module fft_16pt_top #(
     //-------------------------------------------------------------------
     // BS is inverted to form the system reset: while BS=0 every
     // sequential element below is held in async reset; while BS=1,
-    // reset is released and the pipeline runs on the raw clk.
+    // reset is released and everything runs on the gated clock.
     //-------------------------------------------------------------------
     wire sys_rst = ~BS;
+    wire gclk    = clk & BS;
 
     //-------------------------------------------------------------------
     // Twiddle index counter (counter.sv). count[3:0] free-runs while
@@ -77,7 +78,7 @@ module fft_16pt_top #(
     wire [3:0] tw_count;
 
     counter u_tw_counter (
-        .clk  (clk),
+        .clk  (gclk),
         .rst  (sys_rst),
         .en   (1'b1),
         .count(tw_count)
@@ -89,7 +90,7 @@ module fft_16pt_top #(
     //-------------------------------------------------------------------
     wire sel4, sel3, sel2, sel1;
 
-    clk_div u_clkdiv_4 (.clk_in(clk),  .rst(sys_rst), .clk_out(sel4));
+    clk_div u_clkdiv_4 (.clk_in(gclk),  .rst(sys_rst), .clk_out(sel4));
     clk_div u_clkdiv_3 (.clk_in(sel4), .rst(sys_rst), .clk_out(sel3));
     clk_div u_clkdiv_2 (.clk_in(sel3), .rst(sys_rst), .clk_out(sel2));
     clk_div u_clkdiv_1 (.clk_in(sel2), .rst(sys_rst), .clk_out(sel1));
@@ -134,7 +135,7 @@ module fft_16pt_top #(
     mux_2_1_32bit u_topmux_1 (.a(sr_q_1), .b(bfly_sum_1), .sel(~sel1), .y(top_mux_out_1));
 
     shift_register #(.STAGE(1)) u_sr_1 (
-        .clk(clk), .reset(sys_rst), .d(bot_mux_out_1), .q(sr_q_1)
+        .clk(gclk), .reset(sys_rst), .d(bot_mux_out_1), .q(sr_q_1)
     );
 
     complex_multiplier #(.STAGE(1)) u_mult_1 (
@@ -156,7 +157,7 @@ module fft_16pt_top #(
     mux_2_1_32bit u_topmux_2 (.a(sr_q_2), .b(bfly_sum_2), .sel(~sel2), .y(top_mux_out_2));
 
     shift_register #(.STAGE(2)) u_sr_2 (
-        .clk(clk), .reset(sys_rst), .d(bot_mux_out_2), .q(sr_q_2)
+        .clk(gclk), .reset(sys_rst), .d(bot_mux_out_2), .q(sr_q_2)
     );
 
     complex_multiplier #(.STAGE(2)) u_mult_2 (
@@ -178,7 +179,7 @@ module fft_16pt_top #(
     mux_2_1_32bit u_topmux_3 (.a(sr_q_3), .b(bfly_sum_3), .sel(~sel3), .y(top_mux_out_3));
 
     shift_register #(.STAGE(3)) u_sr_3 (
-        .clk(clk), .reset(sys_rst), .d(bot_mux_out_3), .q(sr_q_3)
+        .clk(gclk), .reset(sys_rst), .d(bot_mux_out_3), .q(sr_q_3)
     );
 
     complex_multiplier #(.STAGE(3)) u_mult_3 (
@@ -200,7 +201,7 @@ module fft_16pt_top #(
     mux_2_1_32bit u_topmux_4 (.a(sr_q_4), .b(bfly_sum_4), .sel(~sel4), .y(top_mux_out_4));
 
     shift_register #(.STAGE(4)) u_sr_4 (
-        .clk(clk), .reset(sys_rst), .d(bot_mux_out_4), .q(sr_q_4)
+        .clk(gclk), .reset(sys_rst), .d(bot_mux_out_4), .q(sr_q_4)
     );
 
     // Stage 4's twiddle is always exactly 1+0j (final DIF stage never
