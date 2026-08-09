@@ -3,6 +3,7 @@ K4
 z2
 Z0 !s99 nomlopt
 R0
+R0
 !s11f vlog 2021.1 2021.01, Jan 19 2021
 13
 !s112 1.1
@@ -23,10 +24,10 @@ n@_opt
 Z5 OL;O;2021.1;73
 R1
 T_opt1
-!s110 1786181490
-VTSnQo_lU_aWg^ZlG0U^kn2
+!s110 1786300156
+VV`c8olo2<Li71V441XnI@2
 04 12 4 work Butterfly_tb fast 0
-=1-04cf4be352a1-6a76f772-12-7450
+=1-04bf1b66a00e-6a78c6fb-220-23c4
 R2
 R3
 R4
@@ -34,65 +35,41 @@ n@_opt1
 R5
 vbutterfly
 Z6 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z7 !s110 1786181480
+Z7 !s110 1786300140
 !i10b 1
-!s100 aQ[g[RRc>OV`YjIh9QG2M2
-I>czWd1Wi`z?NIY?Solo^o2
+!s100 F?i8:bX[8eP9cbY:P0@]20
+IfUOHWhC_SL1kLO1NRX:6e0
 S1
 R1
-w1786181251
-8butterfly.sv
-Fbutterfly.sv
-!i122 10
-L0 1 87
+w1786300089
+8Butterfly.sv
+FButterfly.sv
+!i122 13
+L0 1 79
 Z8 VDg1SIo80bB@j0V0VzS_@n1
 Z9 OL;L;2021.1;73
 r1
 !s85 0
 31
-Z10 !s108 1786181480.000000
-Z11 !s107 butterfly_tb.sv|butterfly.sv|fxpt_addsub.sv|
-Z12 !s90 fxpt_addsub.sv|butterfly.sv|butterfly_tb.sv|
+Z10 !s108 1786300140.000000
+Z11 !s107 Wrapper.sv|SR.sv|mux_2_1_32bit.sv|fxpt_addsub_tb.sv|fxpt_addsub.sv|counter.sv|comp_mult.sv|Clk_div.sv|Butterfly_tb.sv|Butterfly.sv|
+Z12 !s90 Butterfly.sv|Butterfly_tb.sv|Clk_div.sv|comp_mult.sv|counter.sv|fxpt_addsub.sv|fxpt_addsub_tb.sv|mux_2_1_32bit.sv|SR.sv|Wrapper.sv|
 !i113 0
 Z13 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-R4
-vbutterfly_tb
-R6
-!s110 1786181443
-!i10b 1
-!s100 aNAb@OHAFN_8bFZMd9]i50
-I^G;V9C8TY0m39=o2bLnS]1
-S1
-R1
-w1786181308
-Z14 8butterfly_tb.sv
-Z15 Fbutterfly_tb.sv
-!i122 9
-Z16 L0 12 116
-R8
-R9
-r1
-!s85 0
-31
-!s108 1786181443.000000
-R11
-R12
-!i113 0
-R13
 R4
 vButterfly_tb
 R6
 R7
 !i10b 1
 !s100 X53T[SFKj3:XDD]2=oOMW3
-IiBzT49ZNeM`D;ko56k@7F1
+I@5lf4dXQM9M;<?5Qeie_41
 S1
 R1
 w1786181475
-R14
-R15
-!i122 10
-R16
+8Butterfly_tb.sv
+FButterfly_tb.sv
+!i122 13
+Z14 L0 12 116
 R8
 R9
 r1
@@ -105,6 +82,126 @@ R12
 R13
 R4
 n@butterfly_tb
+vbutterfly_tb
+R6
+!s110 1786181443
+!i10b 1
+!s100 aNAb@OHAFN_8bFZMd9]i50
+I^G;V9C8TY0m39=o2bLnS]1
+S1
+R1
+w1786181308
+8butterfly_tb.sv
+Fbutterfly_tb.sv
+!i122 9
+R14
+R8
+R9
+r1
+!s85 0
+31
+!s108 1786181443.000000
+!s107 butterfly_tb.sv|butterfly.sv|fxpt_addsub.sv|
+!s90 fxpt_addsub.sv|butterfly.sv|butterfly_tb.sv|
+!i113 0
+R13
+R4
+vclk_div
+R6
+R7
+!i10b 1
+!s100 GV:^P6CP>ckPG36deej_=3
+IEOPQ`h_@`P]QSmU?]NWSC2
+S1
+R1
+w1786031896
+8Clk_div.sv
+FClk_div.sv
+!i122 13
+L0 1 14
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R4
+vcomplex_multiplier
+R6
+R7
+!i10b 1
+!s100 WMWiB7BFPJ93W2>eQ8C2m3
+I29V=j0cz@ciZ>?m5MCgeJ1
+S1
+R1
+w1786299365
+8comp_mult.sv
+Fcomp_mult.sv
+!i122 13
+L0 3 107
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R4
+vcounter
+R6
+R7
+!i10b 1
+!s100 KaPLmKzjS3Fjnnd]QLNWm0
+IgG^K2R[>?K1Ai;QPfB1T63
+S1
+R1
+w1786297984
+8counter.sv
+Fcounter.sv
+!i122 13
+L0 1 15
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R4
+vfft_16pt_top
+R6
+R7
+!i10b 1
+!s100 gm`VQ066ndPI=SHQjPK?Q0
+IN6AF1?zg7ZUkI^e=oF?gO1
+S1
+R1
+w1786299211
+8Wrapper.sv
+FWrapper.sv
+!i122 13
+L0 53 159
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R4
 vfxpt_addsub
 R6
 R7
@@ -116,7 +213,7 @@ R1
 w1786177361
 8fxpt_addsub.sv
 Ffxpt_addsub.sv
-!i122 10
+!i122 13
 L0 1 30
 R8
 R9
@@ -131,25 +228,73 @@ R13
 R4
 vfxpt_addsub_tb
 R6
-!s110 1786177396
+R7
 !i10b 1
 !s100 UdL]70UCE]TzW?MNNo^2F1
 IcezElXD9YoNY2G8Ljf3S<3
 S1
 R1
 w1786177389
-Z17 8fxpt_addsub_tb.sv
-Z18 Ffxpt_addsub_tb.sv
-!i122 4
-Z19 L0 34 211
+Z15 8fxpt_addsub_tb.sv
+Z16 Ffxpt_addsub_tb.sv
+!i122 13
+Z17 L0 34 211
 R8
 R9
 r1
 !s85 0
 31
-!s108 1786177396.000000
-Z20 !s107 fxpt_addsub_tb.sv|fxpt_addsub.sv|
-Z21 !s90 fxpt_addsub.sv|fxpt_addsub_tb.sv|
+R10
+R11
+R12
+!i113 0
+R13
+R4
+vmux_2_1_32bit
+R6
+R7
+!i10b 1
+!s100 e844km[bIU_c4ldHR8zY_0
+I6SZ8m^9Ye2^YGP<anVbNT3
+S1
+R1
+w1786296030
+8mux_2_1_32bit.sv
+Fmux_2_1_32bit.sv
+!i122 13
+L0 1 10
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 0
+R13
+R4
+vshift_register
+R6
+R7
+!i10b 1
+!s100 c;8]3WnhRkSX3Vo[nS05l3
+IZBAzB56ieT5c8AhQWB_3B3
+S1
+R1
+w1786102714
+8SR.sv
+FSR.sv
+!i122 13
+L0 3 29
+R8
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
 !i113 0
 R13
 R4
@@ -162,18 +307,18 @@ IGdWjc_I6cL8:mFWRiY;N30
 S1
 R1
 w1786176798
-R17
-R18
+R15
+R16
 !i122 0
-R19
+R17
 R8
 R9
 r1
 !s85 0
 31
 !s108 1786176984.000000
-R20
-R21
+!s107 fxpt_addsub_tb.sv|fxpt_addsub.sv|
+!s90 fxpt_addsub.sv|fxpt_addsub_tb.sv|
 !i113 0
 R13
 R4
