@@ -3,7 +3,7 @@
 module complex_multiplier #(
     parameter STAGE = 1
 )(
-    input  wire [2:0]  idx,
+    input  wire [3:0]  idx,
     input  wire [31:0] data_in,
     output wire [31:0] data_out
 );
@@ -50,29 +50,32 @@ module complex_multiplier #(
     always @(*) begin
         case (STAGE)
             1: begin
-                case(idx[2:0])
-                    3'd0: begin tw_r =  16384; tw_i =      0; end
-                    3'd1: begin tw_r =  15137; tw_i = -12540; end
-                    3'd2: begin tw_r =  11585; tw_i = -23170; end
-                    3'd3: begin tw_r =   6270; tw_i = -30274; end
-                    3'd4: begin tw_r =      0; tw_i = -32768; end
-                    3'd5: begin tw_r =  -6270; tw_i = -30274; end
-                    3'd6: begin tw_r = -11585; tw_i = -23170; end
-                    3'd7: begin tw_r = -15137; tw_i = -12540; end
+                case(idx[3:0])
+                    4'd0: begin tw_r =  16384; tw_i =      0; end //0
+                    4'd1: begin tw_r =  15137; tw_i = -12540; end //1
+                    4'd2: begin tw_r =  11585; tw_i = -23170; end //2
+                    4'd3: begin tw_r =   6270; tw_i = -30274; end //3
+                    4'd4: begin tw_r =      0; tw_i = -32768; end //4
+                    4'd5: begin tw_r =  -6270; tw_i = -30274; end //5
+                    4'd6: begin tw_r = -11585; tw_i = -23170; end //6
+                    4'd7: begin tw_r = -15137; tw_i = -12540; end //7
+                    default: begin tw_r = 16384; tw_i = 0; end
                 endcase
             end
             2: begin
-                case(idx[1:0])
-                    2'd0: begin tw_r =  16384; tw_i =      0; end
-                    2'd1: begin tw_r =  11585; tw_i = -23170; end
-                    2'd2: begin tw_r =      0; tw_i = -32768; end
-                    2'd3: begin tw_r = -11585; tw_i = -23170; end
+                case(idx[2:0])
+                    3'd0: begin tw_r =  16384; tw_i =      0; end //0
+                    3'd1: begin tw_r =  11585; tw_i = -23170; end //1
+                    3'd2: begin tw_r =      0; tw_i = -32768; end //2
+                    3'd3: begin tw_r = -11585; tw_i = -23170; end //3
+                    default: begin tw_r = 16384; tw_i = 0; end
                 endcase
             end
             3: begin
-                case(idx[0])
-                    1'd0: begin tw_r =  1; tw_i =  0; end 
-                    1'd1: begin tw_r =  0; tw_i = -1; end
+                case(idx[1:0])
+                    2'd0: begin tw_r =  1; tw_i =  0; end //0
+                    2'd1: begin tw_r =  0; tw_i = -1; end //1
+                    default: begin tw_r = 1; tw_i = 0; end
                 endcase
             end
 
