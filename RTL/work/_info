@@ -33,9 +33,10 @@ R3
 R4
 n@_opt1
 R5
+R1
 vbutterfly
 Z6 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z7 !s110 1786300140
+Z7 !s110 1786302669
 !i10b 1
 !s100 F?i8:bX[8eP9cbY:P0@]20
 IfUOHWhC_SL1kLO1NRX:6e0
@@ -44,18 +45,18 @@ R1
 w1786300089
 8Butterfly.sv
 FButterfly.sv
-!i122 13
+!i122 15
 L0 1 79
 Z8 VDg1SIo80bB@j0V0VzS_@n1
 Z9 OL;L;2021.1;73
 r1
 !s85 0
 31
-Z10 !s108 1786300140.000000
-Z11 !s107 Wrapper.sv|SR.sv|mux_2_1_32bit.sv|fxpt_addsub_tb.sv|fxpt_addsub.sv|counter.sv|comp_mult.sv|Clk_div.sv|Butterfly_tb.sv|Butterfly.sv|
-Z12 !s90 Butterfly.sv|Butterfly_tb.sv|Clk_div.sv|comp_mult.sv|counter.sv|fxpt_addsub.sv|fxpt_addsub_tb.sv|mux_2_1_32bit.sv|SR.sv|Wrapper.sv|
+Z10 !s108 1786302669.000000
+!s107 Wrapper.sv|SR.sv|mux_2_1_32bit.sv|fxpt_addsub_tb.sv|fxpt_addsub.sv|counter.sv|comp_mult.sv|Clk_div.sv|Butterfly_tb.sv|Butterfly.sv|
+Z11 !s90 Butterfly.sv|Butterfly_tb.sv|Clk_div.sv|comp_mult.sv|counter.sv|fxpt_addsub.sv|fxpt_addsub_tb.sv|mux_2_1_32bit.sv|SR.sv|Wrapper.sv|
 !i113 0
-Z13 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z12 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R4
 vButterfly_tb
 R6
@@ -68,18 +69,18 @@ R1
 w1786181475
 8Butterfly_tb.sv
 FButterfly_tb.sv
-!i122 13
-Z14 L0 12 116
+!i122 15
+Z13 L0 12 116
 R8
 R9
 r1
 !s85 0
 31
 R10
+Z14 !s107 Wrapper.sv|SR.sv|mux_2_1_32bit.sv|fxpt_addsub_tb.sv|fxpt_addsub.sv|counter.sv|comp_mult.sv|Clk_div.sv|Butterfly_tb.sv|Butterfly.sv|
 R11
-R12
 !i113 0
-R13
+R12
 R4
 n@butterfly_tb
 vbutterfly_tb
@@ -94,7 +95,7 @@ w1786181308
 8butterfly_tb.sv
 Fbutterfly_tb.sv
 !i122 9
-R14
+R13
 R8
 R9
 r1
@@ -104,7 +105,7 @@ r1
 !s107 butterfly_tb.sv|butterfly.sv|fxpt_addsub.sv|
 !s90 fxpt_addsub.sv|butterfly.sv|butterfly_tb.sv|
 !i113 0
-R13
+R12
 R4
 vclk_div
 R6
@@ -117,7 +118,7 @@ R1
 w1786031896
 8Clk_div.sv
 FClk_div.sv
-!i122 13
+!i122 15
 L0 1 14
 R8
 R9
@@ -125,10 +126,10 @@ r1
 !s85 0
 31
 R10
+R14
 R11
-R12
 !i113 0
-R13
+R12
 R4
 vcomplex_multiplier
 R6
@@ -141,7 +142,7 @@ R1
 w1786299365
 8comp_mult.sv
 Fcomp_mult.sv
-!i122 13
+!i122 15
 L0 3 107
 R8
 R9
@@ -149,10 +150,10 @@ r1
 !s85 0
 31
 R10
+R14
 R11
-R12
 !i113 0
-R13
+R12
 R4
 vcounter
 R6
@@ -165,7 +166,7 @@ R1
 w1786297984
 8counter.sv
 Fcounter.sv
-!i122 13
+!i122 15
 L0 1 15
 R8
 R9
@@ -173,10 +174,10 @@ r1
 !s85 0
 31
 R10
+R14
 R11
-R12
 !i113 0
-R13
+R12
 R4
 vfft_16pt_top
 R6
@@ -186,10 +187,10 @@ R7
 IN6AF1?zg7ZUkI^e=oF?gO1
 S1
 R1
-w1786299211
+w1786300231
 8Wrapper.sv
 FWrapper.sv
-!i122 13
+!i122 15
 L0 53 159
 R8
 R9
@@ -197,10 +198,10 @@ r1
 !s85 0
 31
 R10
+R14
 R11
-R12
 !i113 0
-R13
+R12
 R4
 vfxpt_addsub
 R6
@@ -213,7 +214,7 @@ R1
 w1786177361
 8fxpt_addsub.sv
 Ffxpt_addsub.sv
-!i122 13
+!i122 15
 L0 1 30
 R8
 R9
@@ -221,10 +222,10 @@ r1
 !s85 0
 31
 R10
+R14
 R11
-R12
 !i113 0
-R13
+R12
 R4
 vfxpt_addsub_tb
 R6
@@ -237,7 +238,7 @@ R1
 w1786177389
 Z15 8fxpt_addsub_tb.sv
 Z16 Ffxpt_addsub_tb.sv
-!i122 13
+!i122 15
 Z17 L0 34 211
 R8
 R9
@@ -245,10 +246,10 @@ r1
 !s85 0
 31
 R10
+R14
 R11
-R12
 !i113 0
-R13
+R12
 R4
 vmux_2_1_32bit
 R6
@@ -261,7 +262,7 @@ R1
 w1786296030
 8mux_2_1_32bit.sv
 Fmux_2_1_32bit.sv
-!i122 13
+!i122 15
 L0 1 10
 R8
 R9
@@ -269,10 +270,10 @@ r1
 !s85 0
 31
 R10
+R14
 R11
-R12
 !i113 0
-R13
+R12
 R4
 vshift_register
 R6
@@ -285,7 +286,7 @@ R1
 w1786102714
 8SR.sv
 FSR.sv
-!i122 13
+!i122 15
 L0 3 29
 R8
 R9
@@ -293,10 +294,10 @@ r1
 !s85 0
 31
 R10
+R14
 R11
-R12
 !i113 0
-R13
+R12
 R4
 vtb_fixed_addsub
 R6
@@ -320,5 +321,5 @@ r1
 !s107 fxpt_addsub_tb.sv|fxpt_addsub.sv|
 !s90 fxpt_addsub.sv|fxpt_addsub_tb.sv|
 !i113 0
-R13
+R12
 R4
