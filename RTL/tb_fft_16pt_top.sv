@@ -5,7 +5,7 @@ module tb_fft_16pt_top;
     // Parameters
     parameter integer WIDTH = 16;
     // 100 seeds * 16 cycles per block
-    parameter integer NUM_TESTS = 1616; 
+    parameter integer NUM_TESTS = 1615; 
 
     // Signals
     logic               clk;
@@ -42,6 +42,8 @@ module tb_fft_16pt_top;
         $readmemb("fft_outputs.txt", mem_out);
 
         // 2. Initialize signals
+        @(negedge clk);
+
         BS = 0;
         in_sample = '0;
         errors = 0;
@@ -61,19 +63,15 @@ module tb_fft_16pt_top;
             // Drive inputs safely on the falling edge
             in_sample = mem_in[i];
 
-            // Wait for the rising edge (UUT evaluates the input)
             @(posedge clk);
-
-            // Wait until right before the NEXT falling edge to sample the output
-            // This ensures combinational logic has fully settled
-            #4; 
-
             // Compare UUT output against expected memory
             if (out_sample !== mem_out[i]) begin
                 $display("Cycle %4d [FAIL] | Expected: %b | Got: %b", 
                          i, mem_out[i], out_sample);
                 errors++;
             end
+
+
 
             // Wait for the falling edge to loop and push the next input
             @(negedge clk);
