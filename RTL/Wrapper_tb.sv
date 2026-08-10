@@ -19,15 +19,6 @@ module Wrapper_tb;
 
     int errors;
 
-    // Instantiate the Unit Under Test (UUT)
-    fft_16pt_top #(
-        .WIDTH(WIDTH)
-    ) uut (
-        .clk(clk),
-        .BS(BS),
-        .in_sample(in_sample),
-        .out_sample(out_sample)
-    );
 
     Wrapper #(
         .WIDTH(WIDTH)
