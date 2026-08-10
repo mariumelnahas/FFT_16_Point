@@ -19,13 +19,6 @@ QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
 Top level modules:
 	fxpt_addsub
 
-} {} {}} E:/ADI_intern/Final_Project/RTL/Butterfly.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/Butterfly.sv
-QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
--- Compiling module butterfly
-
-Top level modules:
-	butterfly
-
 } {} {}} E:/ADI_intern/Final_Project/RTL/fxpt_addsub_tb.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/fxpt_addsub_tb.sv
 QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
 -- Compiling module fxpt_addsub_tb
@@ -39,13 +32,6 @@ QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
 
 Top level modules:
 	shift_register
-
-} {} {}} E:/ADI_intern/Final_Project/RTL/tb_fft_16pt_top.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/tb_fft_16pt_top.sv
-QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
--- Compiling module tb_fft_16pt_top
-
-Top level modules:
-	tb_fft_16pt_top
 
 } {} {}} E:/ADI_intern/Final_Project/RTL/Butterfly_tb.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/Butterfly_tb.sv
 QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021

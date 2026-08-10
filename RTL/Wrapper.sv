@@ -34,6 +34,7 @@ module fft_16pt_top #(
     assign stage_in_3 = mult_out_2;
     assign stage_in_4 = mult_out_3;
 
+
     // STAGE 1 (SR Delay = 8)
     // stage_in_1 is FL13. SR1 expects FL12.
     wire [2*WIDTH-1:0] stage_in_1_algnd = { 
@@ -94,12 +95,14 @@ module fft_16pt_top #(
     shift_register #(.STAGE(3)) u_sr_3 (.clk(gclk), .reset(sys_rst), .d(bot_mux_out_3), .q(sr_q_3));
     complex_multiplier #(.STAGE(3)) u_mult_3 (.idx(tw_count), .data_in(top_mux_out_3), .data_out(mult_out_3));
 
+
     // STAGE 4 (SR Delay = 1)
     // bfly_diff_4 has Real FL10, Imag FL11. SR4 expects FL11.
     wire [2*WIDTH-1:0] bfly_diff_4_algnd = {
         $signed(bfly_diff_4[31:16]) <<< 1,
         bfly_diff_4[15:0] 
     };
+
     // bfly_sum_4 has Real FL10, Imag FL11. Output expects FL11.
     wire [2*WIDTH-1:0] bfly_sum_4_algnd = {
         $signed(bfly_sum_4[31:16]) <<< 1,
@@ -121,3 +124,4 @@ module fft_16pt_top #(
     assign out_sample = top_mux_out_4;
 
 endmodule
+
