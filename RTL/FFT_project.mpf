@@ -1061,7 +1061,7 @@ DefaultRadixFlags = showbase
 ; File for saving command transcript when -batch option used
 ; This option is ignored when -c, -gui, or -i options are used or if BatchMode above is zero
 ; default is unset so command transcript only goes to stdout for better performance
-; BatchTranscriptFile = transcript
+BatchTranscriptFile = transcript
 
 ; File for saving command transcript, this option is ignored when -batch option is used
 TranscriptFile = transcript

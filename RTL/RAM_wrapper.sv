@@ -57,7 +57,7 @@ module ram_wrapper (
     // -----------------------------------------------------------------
     // 4. RAM Instantiations
     // -----------------------------------------------------------------
-    ram_32x16_async_rst u_ram0 (
+    RAM u_ram0 (
         .clk (clk),
         .rst (rst),
         .we  (we0),
@@ -66,7 +66,7 @@ module ram_wrapper (
         .dout(dout0)
     );
 
-    ram_32x16_async_rst u_ram1 (
+    RAM u_ram1 (
         .clk (clk),
         .rst (rst),
         .we  (we1),

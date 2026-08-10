@@ -47,7 +47,7 @@ module Wrapper_tb;
         real max_err_r = 0.0;
         real max_err_i = 0.0;
         // 1. Load the binary text files into the memory arrays
-        $readmemb("fft_inputs_br.txt", mem_in);
+        $readmemb("fft_inputs.txt", mem_in);
         $readmemb("fft_outputs_br.txt", mem_out);
 
         // 2. Initialize signals
