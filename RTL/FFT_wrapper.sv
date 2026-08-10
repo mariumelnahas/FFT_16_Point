@@ -77,7 +77,7 @@ module fft_16pt_top #(
     //-------------------------------------------------------------------
     wire [3:0] tw_count;
 
-    counter u_tw_counter (
+    counter #(.LENGTH(4)) u_tw_counter (
         .clk  (gclk),
         .rst  (sys_rst),
         .en   (1'b1),

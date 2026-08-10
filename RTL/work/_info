@@ -5,6 +5,8 @@ Z0 !s99 nomlopt
 R0
 R0
 R0
+R0
+R0
 !s11f vlog 2021.1 2021.01, Jan 19 2021
 13
 !s112 1.1
@@ -14,20 +16,21 @@ R0
 cModel Technology
 Z1 dE:/ADI_intern/Assignments/AHB_master
 T_opt
-!s110 1786366267
-VfI7i7>c3:aEPHme]>OhC02
+!s110 1786372593
+VCklFGh1K]9_A`C4ebo7GJ3
 Z2 04 15 4 work tb_fft_16pt_top fast 0
-=1-04cf4be352a1-6a79c93b-13b-296c
+=1-04cf4be352a1-6a79e1f1-1d2-8e50
 Z3 !s124 OEM100
 o-quiet -auto_acc_if_foreign -work work
 Z4 tCvgOpt 0
 n@_opt
 Z5 OL;O;2021.1;73
+R1
 T_opt1
-!s110 1786305264
-V4cjmh6HME=A70hGNmm>>F2
+!s110 1786368677
+VVhB<X75ZmW@7^bzAQ7O2i1
 R2
-=1-04bf1b66a00e-6a78daf0-153-700c
+=1-04cf4be352a1-6a79d2a5-55-3610
 R3
 o-quiet -auto_acc_if_foreign -work work +acc
 R4
@@ -36,7 +39,7 @@ R5
 R1
 vbutterfly
 Z6 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z7 !s110 1786366259
+Z7 !s110 1786373688
 !i10b 1
 !s100 F?i8:bX[8eP9cbY:P0@]20
 IfUOHWhC_SL1kLO1NRX:6e0
@@ -45,18 +48,18 @@ Z8 dE:/ADI_intern/Final_Project/RTL
 w1786300089
 8Butterfly.sv
 FButterfly.sv
-!i122 23
+!i122 43
 L0 1 79
 Z9 VDg1SIo80bB@j0V0VzS_@n1
 Z10 OL;L;2021.1;73
 r1
 !s85 0
 31
-Z11 !s108 1786366259.000000
-Z12 !s107 Wrapper.sv|tb_fft_16pt_top.sv|SR.sv|mux_2_1_32bit.sv|fxpt_addsub_tb.sv|fxpt_addsub.sv|counter.sv|comp_mult.sv|Clk_div.sv|Butterfly_tb.sv|Butterfly.sv|
-Z13 !s90 Butterfly.sv|Butterfly_tb.sv|Clk_div.sv|comp_mult.sv|counter.sv|fxpt_addsub.sv|fxpt_addsub_tb.sv|mux_2_1_32bit.sv|SR.sv|tb_fft_16pt_top.sv|Wrapper.sv|
+Z11 !s108 1786373687.000000
+!s107 Wrapper.sv|tb_fft_16pt_top.sv|SR.sv|mux_2_1_32bit.sv|fxpt_addsub_tb.sv|fxpt_addsub.sv|counter.sv|comp_mult.sv|Clk_div.sv|Butterfly_tb.sv|Butterfly.sv|
+Z12 !s90 Butterfly.sv|Butterfly_tb.sv|Clk_div.sv|comp_mult.sv|counter.sv|fxpt_addsub.sv|fxpt_addsub_tb.sv|mux_2_1_32bit.sv|SR.sv|tb_fft_16pt_top.sv|Wrapper.sv|
 !i113 0
-Z14 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z13 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R4
 vButterfly_tb
 R6
@@ -69,7 +72,7 @@ R8
 w1786181475
 8Butterfly_tb.sv
 FButterfly_tb.sv
-!i122 23
+!i122 43
 L0 12 116
 R9
 R10
@@ -77,10 +80,10 @@ r1
 !s85 0
 31
 R11
+Z14 !s107 Wrapper.sv|tb_fft_16pt_top.sv|SR.sv|mux_2_1_32bit.sv|fxpt_addsub_tb.sv|fxpt_addsub.sv|counter.sv|comp_mult.sv|Clk_div.sv|Butterfly_tb.sv|Butterfly.sv|
 R12
-R13
 !i113 0
-R14
+R13
 R4
 n@butterfly_tb
 vclk_div
@@ -94,7 +97,7 @@ R8
 w1786366001
 8Clk_div.sv
 FClk_div.sv
-!i122 23
+!i122 43
 L0 1 14
 R9
 R10
@@ -102,10 +105,10 @@ r1
 !s85 0
 31
 R11
-R12
-R13
-!i113 0
 R14
+R12
+!i113 0
+R13
 R4
 vcomplex_multiplier
 R6
@@ -118,7 +121,7 @@ R8
 w1786299365
 8comp_mult.sv
 Fcomp_mult.sv
-!i122 23
+!i122 43
 L0 3 107
 R9
 R10
@@ -126,10 +129,10 @@ r1
 !s85 0
 31
 R11
-R12
-R13
-!i113 0
 R14
+R12
+!i113 0
+R13
 R4
 vcounter
 R6
@@ -142,7 +145,7 @@ R8
 w1786297984
 8counter.sv
 Fcounter.sv
-!i122 23
+!i122 43
 L0 1 15
 R9
 R10
@@ -150,10 +153,10 @@ r1
 !s85 0
 31
 R11
-R12
-R13
-!i113 0
 R14
+R12
+!i113 0
+R13
 R4
 vfft_16pt_top
 R6
@@ -166,7 +169,7 @@ R8
 w1786366250
 8Wrapper.sv
 FWrapper.sv
-!i122 23
+!i122 43
 L0 53 165
 R9
 R10
@@ -174,34 +177,34 @@ r1
 !s85 0
 31
 R11
-R12
-R13
-!i113 0
 R14
+R12
+!i113 0
+R13
 R4
 vfxpt_addsub
 R6
 R7
 !i10b 1
-!s100 G6AXGfb4[Q=BKSoRfoRe@1
-IQ]fQg=d>k7QkGef30HNg00
+!s100 lOHHk6:DX612E_5c?:7m:0
+IOdC[_8ea6hWRVV:ES0ZlI2
 S1
 R8
-w1786177361
+w1786372453
 8fxpt_addsub.sv
 Ffxpt_addsub.sv
-!i122 23
-L0 1 30
+!i122 43
+L0 34 58
 R9
 R10
 r1
 !s85 0
 31
 R11
-R12
-R13
-!i113 0
 R14
+R12
+!i113 0
+R13
 R4
 vfxpt_addsub_tb
 R6
@@ -214,7 +217,7 @@ R8
 w1786177389
 8fxpt_addsub_tb.sv
 Ffxpt_addsub_tb.sv
-!i122 23
+!i122 43
 L0 34 211
 R9
 R10
@@ -222,10 +225,10 @@ r1
 !s85 0
 31
 R11
-R12
-R13
-!i113 0
 R14
+R12
+!i113 0
+R13
 R4
 vmux_2_1_32bit
 R6
@@ -238,7 +241,7 @@ R8
 w1786296030
 8mux_2_1_32bit.sv
 Fmux_2_1_32bit.sv
-!i122 23
+!i122 43
 L0 1 10
 R9
 R10
@@ -246,10 +249,10 @@ r1
 !s85 0
 31
 R11
-R12
-R13
-!i113 0
 R14
+R12
+!i113 0
+R13
 R4
 vshift_register
 R6
@@ -262,7 +265,7 @@ R8
 w1786102714
 8SR.sv
 FSR.sv
-!i122 23
+!i122 43
 L0 3 29
 R9
 R10
@@ -270,10 +273,10 @@ r1
 !s85 0
 31
 R11
-R12
-R13
-!i113 0
 R14
+R12
+!i113 0
+R13
 R4
 vtb_fft_16pt_top
 R6
@@ -286,7 +289,7 @@ R8
 w1786304293
 8tb_fft_16pt_top.sv
 Ftb_fft_16pt_top.sv
-!i122 23
+!i122 43
 L0 3 90
 R9
 R10
@@ -294,8 +297,8 @@ r1
 !s85 0
 31
 R11
-R12
-R13
-!i113 0
 R14
+R12
+!i113 0
+R13
 R4
