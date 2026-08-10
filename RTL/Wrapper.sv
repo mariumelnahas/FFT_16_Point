@@ -90,10 +90,15 @@ module fft_16pt_top #(
     //-------------------------------------------------------------------
     wire sel4, sel3, sel2, sel1;
 
-    clk_div u_clkdiv_4 (.clk_in(gclk),  .rst(sys_rst), .clk_out(sel4));
-    clk_div u_clkdiv_3 (.clk_in(sel4), .rst(sys_rst), .clk_out(sel3));
-    clk_div u_clkdiv_2 (.clk_in(sel3), .rst(sys_rst), .clk_out(sel2));
-    clk_div u_clkdiv_1 (.clk_in(sel2), .rst(sys_rst), .clk_out(sel1));
+    //clk_div u_clkdiv_4 (.clk_in(gclk),  .rst(sys_rst), .clk_out(sel4));
+    //clk_div u_clkdiv_3 (.clk_in(sel4), .rst(sys_rst), .clk_out(sel3));
+    //clk_div u_clkdiv_2 (.clk_in(sel3), .rst(sys_rst), .clk_out(sel2));
+    //clk_div u_clkdiv_1 (.clk_in(sel2), .rst(sys_rst), .clk_out(sel1));
+
+    assign sel4 = ~tw_count[0];
+    assign sel3 = ~tw_count[1];
+    assign sel2 = ~tw_count[2];
+    assign sel1 = ~tw_count[3];
 
     //-------------------------------------------------------------------
     // Per-stage packed 32-bit busses: {real[15:0], imag[15:0]}

@@ -6,7 +6,7 @@ module clk_div (
  
     always @(posedge clk_in or posedge rst) begin
         if (rst)
-            clk_out <= 1'b0;
+            clk_out <= 1'b1;
         else
             clk_out <= ~clk_out;
     end

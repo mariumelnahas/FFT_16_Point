@@ -1,0 +1,78 @@
+E:/ADI_intern/Final_Project/RTL/fxpt_addsub.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/fxpt_addsub.sv
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module fxpt_addsub
+
+Top level modules:
+	fxpt_addsub
+
+} {} {}} E:/ADI_intern/Final_Project/RTL/counter.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/counter.sv
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module counter
+
+Top level modules:
+	counter
+
+} {} {}} E:/ADI_intern/Final_Project/RTL/comp_mult.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/comp_mult.sv
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module complex_multiplier
+
+Top level modules:
+	complex_multiplier
+
+} {} {}} E:/ADI_intern/Final_Project/RTL/Clk_div.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/Clk_div.sv
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module clk_div
+
+Top level modules:
+	clk_div
+
+} {} {}} E:/ADI_intern/Final_Project/RTL/Wrapper.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/Wrapper.sv
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module fft_16pt_top
+
+Top level modules:
+	fft_16pt_top
+
+} {} {}} E:/ADI_intern/Final_Project/RTL/tb_fft_16pt_top.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/tb_fft_16pt_top.sv
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module tb_fft_16pt_top
+
+Top level modules:
+	tb_fft_16pt_top
+
+} {} {}} E:/ADI_intern/Final_Project/RTL/SR.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/SR.sv
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module shift_register
+
+Top level modules:
+	shift_register
+
+} {} {}} E:/ADI_intern/Final_Project/RTL/fxpt_addsub_tb.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/fxpt_addsub_tb.sv
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module fxpt_addsub_tb
+
+Top level modules:
+	fxpt_addsub_tb
+
+} {} {}} E:/ADI_intern/Final_Project/RTL/Butterfly.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/Butterfly.sv
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module butterfly
+
+Top level modules:
+	butterfly
+
+} {} {}} E:/ADI_intern/Final_Project/RTL/mux_2_1_32bit.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/mux_2_1_32bit.sv
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module mux_2_1_32bit
+
+Top level modules:
+	mux_2_1_32bit
+
+} {} {}} E:/ADI_intern/Final_Project/RTL/Butterfly_tb.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/Butterfly_tb.sv
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module Butterfly_tb
+
+Top level modules:
+	Butterfly_tb
+
+} {} {}}
