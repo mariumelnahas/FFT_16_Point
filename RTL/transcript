@@ -1,5 +1,5 @@
 # vsim -c -do "run -all; quit" tb_fft_16pt_top 
-# Start time: 21:21:17 on Aug 10,2026
+# Start time: 21:44:43 on Aug 10,2026
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # ** Warning: tb_fft_16pt_top.sv(46): (vopt-2244) Variable 'max_err_r' is implicitly static. You must either explicitly declare it as static or automatic
 # or remove the initialization in the declaration of variable.
@@ -1461,5 +1461,5 @@
 # Break at tb_fft_16pt_top.sv line 129
 # Stopped at tb_fft_16pt_top.sv line 129
 #  quit
-# End time: 21:21:21 on Aug 10,2026, Elapsed time: 0:00:04
+# End time: 21:44:48 on Aug 10,2026, Elapsed time: 0:00:05
 # Errors: 0, Warnings: 2

@@ -70,8 +70,8 @@ module tb_fft_16pt_top;
             
             // Drive inputs safely on the falling edge
             in_sample = mem_in[i];
-
-            @(posedge clk);
+            #3;
+            //@(posedge clk);
             // Compare UUT output against expected memory
             if (out_sample !== mem_out[i]) begin
                 

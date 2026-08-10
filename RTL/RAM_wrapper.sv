@@ -1,4 +1,4 @@
-module ram_ping_pong_wrapper (
+module ram_wrapper (
     input  wire        clk,
     input  wire        rst,   // Active-high asynchronous reset
     input  wire [31:0] din,   // Incoming data stream
