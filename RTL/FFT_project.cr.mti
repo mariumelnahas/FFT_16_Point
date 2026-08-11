@@ -1,16 +1,9 @@
-E:/ADI_intern/Final_Project/RTL/Clk_div.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/Clk_div.sv
+E:/ADI_intern/Final_Project/RTL/counter.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/counter.sv
 QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
--- Compiling module clk_div
+-- Compiling module counter
 
 Top level modules:
-	clk_div
-
-} {} {}} E:/ADI_intern/Final_Project/RTL/comp_mult.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/comp_mult.sv
-QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
--- Compiling module complex_multiplier
-
-Top level modules:
-	complex_multiplier
+	counter
 
 } {} {}} E:/ADI_intern/Final_Project/RTL/fxpt_addsub.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/fxpt_addsub.sv
 QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
@@ -19,12 +12,37 @@ QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
 Top level modules:
 	fxpt_addsub
 
-} {} {}} E:/ADI_intern/Final_Project/RTL/fxpt_addsub_tb.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/fxpt_addsub_tb.sv
+} {} {}} E:/ADI_intern/Final_Project/RTL/comp_mult.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/comp_mult.sv
 QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
--- Compiling module fxpt_addsub_tb
+-- Compiling module complex_multiplier
 
 Top level modules:
-	fxpt_addsub_tb
+	complex_multiplier
+
+} {} {}} E:/ADI_intern/Final_Project/RTL/Clk_div.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/Clk_div.sv
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module clk_div
+
+Top level modules:
+	clk_div
+
+} {} {}} E:/ADI_intern/Final_Project/RTL/tb_fft_16pt_top.sv {2 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/tb_fft_16pt_top.sv
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module tb_fft_16pt_top
+** Warning: E:/ADI_intern/Final_Project/RTL/tb_fft_16pt_top.sv(46): (vlog-2244) Variable 'max_err_r' is implicitly static. You must either explicitly declare it as static or automatic
+or remove the initialization in the declaration of variable.
+** Warning: E:/ADI_intern/Final_Project/RTL/tb_fft_16pt_top.sv(47): (vlog-2244) Variable 'max_err_i' is implicitly static. You must either explicitly declare it as static or automatic
+or remove the initialization in the declaration of variable.
+
+Top level modules:
+	tb_fft_16pt_top
+
+} {} {}} E:/ADI_intern/Final_Project/RTL/Butterfly.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/Butterfly.sv
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module butterfly
+
+Top level modules:
+	butterfly
 
 } {} {}} E:/ADI_intern/Final_Project/RTL/SR.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/SR.sv
 QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
@@ -33,12 +51,12 @@ QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
 Top level modules:
 	shift_register
 
-} {} {}} E:/ADI_intern/Final_Project/RTL/Butterfly_tb.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/Butterfly_tb.sv
+} {} {}} E:/ADI_intern/Final_Project/RTL/fxpt_addsub_tb.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/fxpt_addsub_tb.sv
 QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
--- Compiling module Butterfly_tb
+-- Compiling module fxpt_addsub_tb
 
 Top level modules:
-	Butterfly_tb
+	fxpt_addsub_tb
 
 } {} {}} E:/ADI_intern/Final_Project/RTL/mux_2_1_32bit.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/mux_2_1_32bit.sv
 QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
@@ -46,5 +64,12 @@ QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
 
 Top level modules:
 	mux_2_1_32bit
+
+} {} {}} E:/ADI_intern/Final_Project/RTL/Butterfly_tb.sv {1 {vlog -work work -vopt -sv -stats=none E:/ADI_intern/Final_Project/RTL/Butterfly_tb.sv
+QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+-- Compiling module Butterfly_tb
+
+Top level modules:
+	Butterfly_tb
 
 } {} {}}

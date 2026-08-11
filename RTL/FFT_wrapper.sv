@@ -11,10 +11,10 @@ module fft_16pt_top #(
 );
 
     wire sys_rst = ~BS;
-    wire gclk    = clk & BS;
+    //wire gclk    = clk & BS;
 
     wire [3:0] tw_count;
-    counter u_tw_counter (.clk(gclk), .rst(sys_rst), .en(1'b1), .count(tw_count));
+    counter u_tw_counter (.clk(clk), .rst(sys_rst), .en(1'b1), .count(tw_count));
 
     wire sel4 = ~tw_count[0];
     wire sel3 = ~tw_count[1];
@@ -52,7 +52,7 @@ module fft_16pt_top #(
     mux_2_1_32bit u_botmux_1 (.a(bfly_diff_1), .b(stage_in_1_algnd), .sel(sel1),  .y(bot_mux_out_1));
     mux_2_1_32bit u_topmux_1 (.a(sr_q_1), .b(bfly_sum_1), .sel(~sel1), .y(top_mux_out_1));
 
-    shift_register #(.STAGE(1)) u_sr_1 (.clk(gclk), .reset(sys_rst), .d(bot_mux_out_1), .q(sr_q_1));
+    shift_register #(.STAGE(1)) u_sr_1 (.clk(clk), .reset(sys_rst), .d(bot_mux_out_1), .q(sr_q_1));
     complex_multiplier #(.STAGE(1)) u_mult_1 (.idx(tw_count), .data_in(top_mux_out_1), .data_out(mult_out_1));
 
     // STAGE 2 (SR Delay = 4)
@@ -77,7 +77,7 @@ module fft_16pt_top #(
     mux_2_1_32bit u_botmux_2 (.a(bfly_diff_2_algnd), .b(stage_in_2), .sel(sel2),  .y(bot_mux_out_2));
     mux_2_1_32bit u_topmux_2 (.a(sr_q_2_algnd), .b(bfly_sum_2), .sel(~sel2), .y(top_mux_out_2));
 
-    shift_register #(.STAGE(2)) u_sr_2 (.clk(gclk), .reset(sys_rst), .d(bot_mux_out_2), .q(sr_q_2));
+    shift_register #(.STAGE(2)) u_sr_2 (.clk(clk), .reset(sys_rst), .d(bot_mux_out_2), .q(sr_q_2));
     complex_multiplier #(.STAGE(2)) u_mult_2 (.idx(tw_count), .data_in(top_mux_out_2), .data_out(mult_out_2));
 
     // STAGE 3 (SR Delay = 2)
@@ -92,7 +92,7 @@ module fft_16pt_top #(
     mux_2_1_32bit u_botmux_3 (.a(bfly_diff_3), .b(stage_in_3), .sel(sel3),  .y(bot_mux_out_3));
     mux_2_1_32bit u_topmux_3 (.a(sr_q_3), .b(bfly_sum_3), .sel(~sel3), .y(top_mux_out_3));
 
-    shift_register #(.STAGE(3)) u_sr_3 (.clk(gclk), .reset(sys_rst), .d(bot_mux_out_3), .q(sr_q_3));
+    shift_register #(.STAGE(3)) u_sr_3 (.clk(clk), .reset(sys_rst), .d(bot_mux_out_3), .q(sr_q_3));
     complex_multiplier #(.STAGE(3)) u_mult_3 (.idx(tw_count), .data_in(top_mux_out_3), .data_out(mult_out_3));
 
 
@@ -119,7 +119,7 @@ module fft_16pt_top #(
     mux_2_1_32bit u_botmux_4 (.a(bfly_diff_4_algnd), .b(stage_in_4), .sel(sel4),  .y(bot_mux_out_4));
     mux_2_1_32bit u_topmux_4 (.a(sr_q_4), .b(bfly_sum_4_algnd), .sel(~sel4), .y(top_mux_out_4));
 
-    shift_register #(.STAGE(4)) u_sr_4 (.clk(gclk), .reset(sys_rst), .d(bot_mux_out_4), .q(sr_q_4));
+    shift_register #(.STAGE(4)) u_sr_4 (.clk(clk), .reset(sys_rst), .d(bot_mux_out_4), .q(sr_q_4));
 
     assign out_sample = top_mux_out_4;
 

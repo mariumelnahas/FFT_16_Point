@@ -1,0 +1,8 @@
+add wave -position end  sim:/Wrapper_tb/DUT/RAM_block/dout
+add wave -position 4  sim:/Wrapper_tb/DUT/RAM_block/din
+add wave -position end  sim:/Wrapper_tb/DUT/RAM_block/u_ram0/mem
+add wave -position end  sim:/Wrapper_tb/DUT/RAM_block/u_ram0/addr
+add wave -position end  sim:/Wrapper_tb/DUT/RAM_block/u_ram1/mem
+add wave -position end  sim:/Wrapper_tb/DUT/RAM_block/u_ram1/addr
+add wave -position end  sim:/Wrapper_tb/DUT/RAM_block/u_counter/count
+add wave -position 3  sim:/Wrapper_tb/DUT/gclk

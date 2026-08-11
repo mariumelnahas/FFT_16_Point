@@ -4,7 +4,7 @@ module RAM (
     input wire        rst,   // Active-high asynchronous reset
     input  wire [3:0]  addr,  // 4-bit address line (2^4 = 16 locations)
     input  wire [31:0] din,   // 32-bit data input
-    output reg  [31:0] dout   // 32-bit data output
+    output wire  [31:0] dout   // 32-bit data output
 );
 
     // Memory array: 16 memory slots, each 32 bits wide
@@ -12,15 +12,12 @@ module RAM (
     
     integer i;
 
+    assign dout = (rst) ? 32'h0 : (~we) ? mem[addr] : 32'bz; // Tri-state output for read operation
+
     // Asynchronous Active-High Reset Logic
-    always @(posedge clk or posedge rst) begin
-        if (rst) begin
-            // Clear output and reset all 16 memory locations
-            dout <= 32'b0;
-        end else begin
+    always @(posedge clk) begin
             if (we) mem[addr] <= din;   // Synchronous write operation
-            else dout <= mem[addr];      // Synchronous read-first operation
-        end
+
     end
 
 endmodule

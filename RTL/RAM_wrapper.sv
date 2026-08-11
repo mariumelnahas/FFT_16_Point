@@ -2,7 +2,7 @@ module ram_wrapper (
     input  wire        clk,
     input  wire        rst,   // Active-high asynchronous reset
     input  wire [31:0] din,   // Incoming data stream
-    output wire [31:0] dout   // Outgoing bit-reversed data stream
+    output logic [31:0] dout   // Outgoing bit-reversed data stream
 );
 
     // -----------------------------------------------------------------
@@ -23,11 +23,12 @@ module ram_wrapper (
     counter #(
         .LENGTH(5)
     ) u_counter (
-        .clk  (clk),
+        .clk  (~clk),
         .rst  (rst),
         .en   (1'b1),
         .count(cnt)
     );
+
 
     assign phase    = cnt[4];    // MSB toggles every 16 cycles
     assign seq_addr = cnt[3:0];  // 4 LSBs drive normal 0 -> 15 sequence
@@ -46,14 +47,24 @@ module ram_wrapper (
     // Phase 0 (cnt[4] = 0): WRITE RAM0 (Sequential), READ RAM1 (Bit-Reversed)
     // Phase 1 (cnt[4] = 1): WRITE RAM1 (Sequential), READ RAM0 (Bit-Reversed)
 
+    
     assign we0   = ~phase;
     assign we1   = phase;
 
     assign addr0 = (~phase) ? seq_addr : rev_addr;
     assign addr1 = (phase)  ? seq_addr : rev_addr;
 
-    assign dout  = (phase)  ? dout0    : dout1;
+    //assign dout  = (clk)? ((phase)  ? dout0    : dout1) : dout;
 
+    always_ff @(posedge clk, posedge rst) begin
+        if (rst) begin
+            dout <= 32'h0;
+        end else begin
+            dout <= (phase) ? dout0 : dout1;
+        end
+    end
+
+    
     // -----------------------------------------------------------------
     // 4. RAM Instantiations
     // -----------------------------------------------------------------

@@ -9,11 +9,13 @@ module Wrapper #(parameter int WIDTH = 16) (
 wire [2*WIDTH-1:0] FFT_out;
 wire [2*WIDTH-1:0] reg_out;
 
+wire gclk = clk & BS;
+
 fft_16pt_top #(
     .WIDTH(WIDTH)
 ) FFT_block
 (
-    .clk(clk),
+    .clk(gclk),
     .BS(BS),
     .in_sample(din),
     .out_sample(FFT_out)
@@ -23,7 +25,7 @@ register #(
     .WIDTH(2*WIDTH)
 ) register_block 
 (
-    .clk(clk),
+    .clk(gclk),
     .rst(~BS),
     .we(1'b1),
     .din(FFT_out),
@@ -32,7 +34,7 @@ register #(
 
 
 ram_wrapper  RAM_block(
-    .clk(clk),
+    .clk(gclk),
     .rst(~BS),
     .din(reg_out),   // Incoming data stream
     .dout(dout)   // Outgoing bit-reversed data stream

@@ -71,8 +71,8 @@ module Wrapper_tb;
             
             // Drive inputs safely on the falling edge
             in_sample = mem_in[i];
-            #3;
-            //@(posedge clk);
+            @(negedge clk);
+            #3; // Small delay to allow DUT to process inputs
             // Compare UUT output against expected memory
             if (out_sample !== mem_out[i]) begin
                 
@@ -100,18 +100,32 @@ module Wrapper_tb;
                 if (err_i > max_err_i) max_err_i = err_i;
 
                 // 6. Print the formatted output
-                $display("Cycle %4d [FAIL] | Expected: %0.4f %s i %0.4f | Got: %0.4f %s i %0.4f", 
-                         i, 
+                $display("Cycle %4d RAM cnt %0d [FAIL] | Expected: %0.4f %s i %0.4f | Got: %0.4f %s i %0.4f", 
+                         i, DUT.RAM_block.cnt,
                          exp_r, exp_sign, abs_exp_i, 
                          got_r, got_sign, abs_got_i);
                 
                 errors++;
+
+                
+                if (max_err_r > 0.01 || max_err_i > 0.01) begin
+                    $display("ERROR: Maximum error exceeded threshold! Halting simulation.");
+                    $stop;
+                end
+                
+
+            end
+            else begin
+                $display("Cycle %4d RAM cnt %0d [PASS] | Expected: %0.4f %s i %0.4f | Got: %0.4f %s i %0.4f", 
+                         i, DUT.RAM_block.cnt - 1,
+                         exp_r, exp_sign, abs_exp_i, 
+                         got_r, got_sign, abs_got_i);
             end
 
 
 
             // Wait for the falling edge to loop and push the next input
-            @(negedge clk);
+            //@(negedge clk);
         end
 
         // 5. Final Report
