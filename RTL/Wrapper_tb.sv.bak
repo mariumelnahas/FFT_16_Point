@@ -50,7 +50,7 @@ module Wrapper_tb;
         integer fd_rtl;
         // 1. Load the binary text files into the memory arrays
         $readmemb("fft_inputs.txt", mem_in);
-        $readmemb("fft_outputs.txt", mem_out);
+        $readmemb("fft_outputs_br.txt", mem_out);
 
         fd_rtl = $fopen("rtl_outputs_m.txt", "w");
         if (fd_rtl == 0) begin
@@ -83,7 +83,7 @@ module Wrapper_tb;
             #3; // Small delay to allow DUT to process inputs
             // Compare UUT output against expected memory
             $fwrite(fd_rtl, "%032b\n", out_sample);
-            if (out_sample != mem_out[i]) begin
+            if (out_sample !== mem_out[i]) begin
                 
                 // 1. Extract and convert Expected Data (Fractional Length = 11)
                 exp_r = $itor($signed(mem_out[i][31:16])) / 2048.0;

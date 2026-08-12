@@ -6,63 +6,6 @@ R0
 R0
 R0
 R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
-R0
 !s11f vlog 2021.1 2021.01, Jan 19 2021
 13
 !s112 1.1
@@ -70,64 +13,63 @@ R0
 !i10e 25
 !i10f 100
 cModel Technology
-Z1 dE:/ADI_intern/Assignments/AHB_master
+Z1 dE:/ADI_intern/Final_Project/RTL
 T_opt
-!s110 1786387484
-V^^SenY[BQ_c^1Le8oI[_o2
-04 15 4 work tb_fft_16pt_top fast 0
-=1-04cf4be352a1-6a7a1c1b-2d5-25ac
-Z2 !s124 OEM100
-Z3 o-quiet -auto_acc_if_foreign -work work
-Z4 tCvgOpt 0
+!s110 1786551257
+V=E9n46d5zUOd>Pch?WlWH0
+Z2 04 10 4 work Wrapper_tb fast 0
+=1-04cf4be352a1-6a7c9bd9-1a3-527c
+Z3 !s124 OEM100
+Z4 o-quiet -auto_acc_if_foreign -work work
+Z5 tCvgOpt 0
 n@_opt
-Z5 OL;O;2021.1;73
+Z6 OL;O;2021.1;73
 R1
 T_opt1
-!s110 1786481917
-Vaglfl3[@jQ>8I?ImC_4Rg3
-Z6 04 10 4 work Wrapper_tb fast 0
-=1-04cf4be352a1-6a7b8cfd-15a-8b58
+!s110 1786554091
+VDfgkNKnmj0;LD>4jTSBTC1
 R2
-o-quiet -auto_acc_if_foreign -work work +acc
-R4
-n@_opt1
-R5
-R1
-T_opt2
-!s110 1786484367
-VB1Q2BL<oXedXSIc^m_IV53
-R6
-=1-04cf4be352a1-6a7b968f-8d-23f0
-R2
+=1-04cf4be352a1-6a7ca6eb-1d5-78ec
 R3
 R4
-n@_opt2
 R5
+n@_opt1
+R6
+T_opt2
+!s110 1786553881
+VGIkg;h;JXz0YdV>2RN:@]1
+04 13 4 work compare_files fast 0
+=1-04cf4be352a1-6a7ca619-3-9934
+R3
+R4
+R5
+n@_opt2
+R6
 R1
 vbit_reversal
 Z7 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z8 !s110 1786484598
+Z8 !s110 1786554083
 !i10b 1
 !s100 m0cOP@lGaS_=^De>l];@F1
 IQ:TRngG:7`7hH31_4m9I32
 S1
-Z9 dE:/ADI_intern/Final_Project/RTL
-Z10 w1786472666
+R1
+Z9 w1786472666
 8bit_reversal.sv
 Fbit_reversal.sv
-!i122 157
+!i122 8
 L0 1 8
-Z11 VDg1SIo80bB@j0V0VzS_@n1
-Z12 OL;L;2021.1;73
+Z10 VDg1SIo80bB@j0V0VzS_@n1
+Z11 OL;L;2021.1;73
 r1
 !s85 0
 31
-Z13 !s108 1786484598.000000
-!s107 Wrapper_tb.sv|Wrapper.sv|tb_fft_16pt_top.sv|SR.sv|Register.sv|RAM_wrapper.sv|RAM.sv|mux_2_1_32bit.sv|fxpt_addsub_tb.sv|fxpt_addsub.sv|FFT_wrapper.sv|counter.sv|comp_mult.sv|Clk_div.sv|Butterfly_tb.sv|Butterfly.sv|bit_reversal.sv|
-Z14 !s90 bit_reversal.sv|Butterfly.sv|Butterfly_tb.sv|Clk_div.sv|comp_mult.sv|counter.sv|FFT_wrapper.sv|fxpt_addsub.sv|fxpt_addsub_tb.sv|mux_2_1_32bit.sv|RAM.sv|RAM_wrapper.sv|Register.sv|SR.sv|tb_fft_16pt_top.sv|Wrapper.sv|Wrapper_tb.sv|
+Z12 !s108 1786554083.000000
+Z13 !s107 Wrapper_tb.sv|Wrapper.sv|tb_fft_16pt_top.sv|SR.sv|Register.sv|RAM_wrapper.sv|RAM.sv|mux_2_1_32bit.sv|fxpt_addsub_tb.sv|fxpt_addsub.sv|FFT_wrapper.sv|counter.sv|comp_mult.sv|compare_files.sv|Clk_div.sv|Butterfly_tb.sv|Butterfly.sv|bit_reversal.sv|
+Z14 !s90 bit_reversal.sv|Butterfly.sv|Butterfly_tb.sv|Clk_div.sv|compare_files.sv|comp_mult.sv|counter.sv|FFT_wrapper.sv|fxpt_addsub.sv|fxpt_addsub_tb.sv|mux_2_1_32bit.sv|RAM.sv|RAM_wrapper.sv|Register.sv|SR.sv|tb_fft_16pt_top.sv|Wrapper.sv|Wrapper_tb.sv|
 !i113 0
 Z15 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-R4
+R5
 vbutterfly
 R7
 R8
@@ -135,23 +77,23 @@ R8
 !s100 F?i8:bX[8eP9cbY:P0@]20
 IfUOHWhC_SL1kLO1NRX:6e0
 S1
+R1
 R9
-R10
 8Butterfly.sv
 FButterfly.sv
-!i122 157
+!i122 8
 L0 1 79
+R10
 R11
-R12
 r1
 !s85 0
 31
+R12
 R13
-Z16 !s107 Wrapper_tb.sv|Wrapper.sv|tb_fft_16pt_top.sv|SR.sv|Register.sv|RAM_wrapper.sv|RAM.sv|mux_2_1_32bit.sv|fxpt_addsub_tb.sv|fxpt_addsub.sv|FFT_wrapper.sv|counter.sv|comp_mult.sv|Clk_div.sv|Butterfly_tb.sv|Butterfly.sv|bit_reversal.sv|
 R14
 !i113 0
 R15
-R4
+R5
 vButterfly_tb
 R7
 R8
@@ -159,23 +101,23 @@ R8
 !s100 X53T[SFKj3:XDD]2=oOMW3
 I@5lf4dXQM9M;<?5Qeie_41
 S1
-R9
+R1
 w1786181475
 8Butterfly_tb.sv
 FButterfly_tb.sv
-!i122 157
+!i122 8
 L0 12 116
+R10
 R11
-R12
 r1
 !s85 0
 31
+R12
 R13
-R16
 R14
 !i113 0
 R15
-R4
+R5
 n@butterfly_tb
 vclk_div
 R7
@@ -184,47 +126,95 @@ R8
 !s100 9c=S2XW[=e1HbeR;41Snd0
 IEFPDEi>CACB]Uoznei^zB2
 S1
+R1
 R9
-R10
 8Clk_div.sv
 FClk_div.sv
-!i122 157
+!i122 8
 L0 1 14
+R10
 R11
-R12
 r1
 !s85 0
 31
+R12
 R13
-R16
 R14
 !i113 0
 R15
-R4
+R5
+vcompare_files
+R7
+R8
+!i10b 1
+!s100 _NA^HB^RPo=f0bUoZVELO2
+IV]H2LT0H^c_A>_SbjSQQU2
+S1
+R1
+w1786553838
+Z16 8compare_files.sv
+Z17 Fcompare_files.sv
+!i122 8
+L0 1 55
+R10
+R11
+r1
+!s85 0
+31
+R12
+R13
+R14
+!i113 0
+R15
+R5
+vcompare_outputs_tb
+R7
+!s110 1786553658
+!i10b 1
+!s100 mm<_i^[UiB<WOV^XB1=SD1
+IBCHCJYXAXR@IK7EA_3H^Z2
+S1
+R1
+w1786487616
+R16
+R17
+!i122 4
+L0 15 177
+R10
+R11
+r1
+!s85 0
+31
+!s108 1786553658.000000
+R13
+R14
+!i113 0
+R15
+R5
 vcomplex_multiplier
 R7
 R8
 !i10b 1
-!s100 WMWiB7BFPJ93W2>eQ8C2m3
-I29V=j0cz@ciZ>?m5MCgeJ1
+!s100 KB^V_M=7[NkCLokQW9ckl3
+IzChbii>nz[Poc^UMBEEGl3
 S1
-R9
-R10
+R1
+w1786550655
 8comp_mult.sv
 Fcomp_mult.sv
-!i122 157
-L0 3 107
+!i122 8
+L0 113 164
+R10
 R11
-R12
 r1
 !s85 0
 31
+R12
 R13
-R16
 R14
 !i113 0
 R15
-R4
+R5
 vcounter
 R7
 R8
@@ -232,47 +222,47 @@ R8
 !s100 7kE<Ri_V[?[DkWQ;@N3mK0
 Ia7Pa0aP>l=8b::nkJdoP62
 S1
+R1
 R9
-R10
 8counter.sv
 Fcounter.sv
-!i122 157
+!i122 8
 L0 1 17
+R10
 R11
-R12
 r1
 !s85 0
 31
+R12
 R13
-R16
 R14
 !i113 0
 R15
-R4
+R5
 vfft_16pt_top
 R7
 R8
 !i10b 1
-!s100 ;^niNmNA2ToTaDJ4NEI0W3
-I85C3`Yb1TSBg9GT>SG^Mo0
+!s100 [jioVlnKKD644aEK:gCZK1
+I]BR3G;M^n`z_FGM1[3A1?1
 S1
-R9
-w1786475577
+R1
+w1786550989
 8FFT_wrapper.sv
 FFFT_wrapper.sv
-!i122 157
-L0 3 124
+!i122 8
+L0 130 145
+R10
 R11
-R12
 r1
 !s85 0
 31
+R12
 R13
-R16
 R14
 !i113 0
 R15
-R4
+R5
 vfxpt_addsub
 R7
 R8
@@ -280,23 +270,23 @@ R8
 !s100 lOHHk6:DX612E_5c?:7m:0
 IOdC[_8ea6hWRVV:ES0ZlI2
 S1
+R1
 R9
-R10
 8fxpt_addsub.sv
 Ffxpt_addsub.sv
-!i122 157
+!i122 8
 L0 34 58
+R10
 R11
-R12
 r1
 !s85 0
 31
+R12
 R13
-R16
 R14
 !i113 0
 R15
-R4
+R5
 vfxpt_addsub_tb
 R7
 R8
@@ -304,23 +294,23 @@ R8
 !s100 UdL]70UCE]TzW?MNNo^2F1
 IcezElXD9YoNY2G8Ljf3S<3
 S1
-R9
+R1
 w1786386053
 8fxpt_addsub_tb.sv
 Ffxpt_addsub_tb.sv
-!i122 157
+!i122 8
 L0 34 211
+R10
 R11
-R12
 r1
 !s85 0
 31
+R12
 R13
-R16
 R14
 !i113 0
 R15
-R4
+R5
 vmux_2_1_32bit
 R7
 R8
@@ -328,23 +318,23 @@ R8
 !s100 e844km[bIU_c4ldHR8zY_0
 I6SZ8m^9Ye2^YGP<anVbNT3
 S1
+R1
 R9
-R10
 8mux_2_1_32bit.sv
 Fmux_2_1_32bit.sv
-!i122 157
+!i122 8
 L0 1 10
+R10
 R11
-R12
 r1
 !s85 0
 31
+R12
 R13
-R16
 R14
 !i113 0
 R15
-R4
+R5
 vRAM
 R7
 R8
@@ -352,48 +342,24 @@ R8
 !s100 INnJ>0McPcBDjjQ1Bjz3i3
 I<6;g0T?JaJ9nzPlENFLFP2
 S1
-R9
+R1
 w1786484273
 8RAM.sv
 FRAM.sv
-!i122 157
+!i122 8
 L0 1 23
+R10
 R11
-R12
 r1
 !s85 0
 31
+R12
 R13
-R16
 R14
 !i113 0
 R15
-R4
+R5
 n@r@a@m
-vram_ping_pong_wrapper
-R7
-!s110 1786387477
-!i10b 1
-!s100 kGAm5j9X5l3jaAI1BZANG1
-IlOgh<_MF56cEg3_RE0K3>0
-S1
-R9
-w1786377895
-Z17 8RAM_wrapper.sv
-Z18 FRAM_wrapper.sv
-!i122 68
-L0 1 78
-R11
-R12
-r1
-!s85 0
-31
-!s108 1786387476.000000
-!s107 Wrapper.sv|tb_fft_16pt_top.sv|SR.sv|RAM_wrapper.sv|RAM.sv|mux_2_1_32bit.sv|fxpt_addsub_tb.sv|fxpt_addsub.sv|FFT_wrapper.sv|counter.sv|comp_mult.sv|Clk_div.sv|Butterfly_tb.sv|Butterfly.sv|bit_reversal.sv|
-!s90 bit_reversal.sv|Butterfly.sv|Butterfly_tb.sv|Clk_div.sv|comp_mult.sv|counter.sv|FFT_wrapper.sv|fxpt_addsub.sv|fxpt_addsub_tb.sv|mux_2_1_32bit.sv|RAM.sv|RAM_wrapper.sv|SR.sv|tb_fft_16pt_top.sv|Wrapper.sv|
-!i113 0
-R15
-R4
 vram_wrapper
 R7
 R8
@@ -401,23 +367,23 @@ R8
 !s100 41=k]:k2AU5QkSLl]bFAo2
 IJnIQ?`g;__hMkY=U5Ojob1
 S1
-R9
+R1
 w1786484341
-R17
-R18
-!i122 157
+8RAM_wrapper.sv
+FRAM_wrapper.sv
+!i122 8
 L0 1 89
+R10
 R11
-R12
 r1
 !s85 0
 31
+R12
 R13
-R16
 R14
 !i113 0
 R15
-R4
+R5
 vregister
 R7
 R8
@@ -425,47 +391,47 @@ R8
 !s100 P?0m[S>;FNU5Wlib_6jlX0
 IPTeHaoj0AU;LeiL;IOh?c0
 S1
+R1
 R9
-R10
 8Register.sv
 FRegister.sv
-!i122 157
+!i122 8
 L0 1 20
+R10
 R11
-R12
 r1
 !s85 0
 31
+R12
 R13
-R16
 R14
 !i113 0
 R15
-R4
+R5
 vshift_register
 R7
 R8
 !i10b 1
-!s100 c;8]3WnhRkSX3Vo[nS05l3
-IZBAzB56ieT5c8AhQWB_3B3
+!s100 ZA8ma@AaWSiO?]CO_J^iR0
+Ie^D@HYa=KYmF0FO2`JDaF0
 S1
-R9
-R10
+R1
+w1786489014
 8SR.sv
 FSR.sv
-!i122 157
+!i122 8
 L0 3 29
+R10
 R11
-R12
 r1
 !s85 0
 31
+R12
 R13
-R16
 R14
 !i113 0
 R15
-R4
+R5
 vtb_fft_16pt_top
 R7
 R8
@@ -473,47 +439,23 @@ R8
 !s100 BeIb0RMFmJgQ?:@`TFlza2
 I=lKo:LEBfN:ZKSg_a7`l71
 S1
+R1
 R9
-R10
 8tb_fft_16pt_top.sv
 Ftb_fft_16pt_top.sv
-!i122 157
+!i122 8
 L0 3 130
+R10
 R11
-R12
 r1
 !s85 0
 31
+R12
 R13
-R16
 R14
 !i113 0
 R15
-R4
-vwrapper
-R7
-!s110 1786390344
-!i10b 1
-!s100 aT;GSkgU1=A;j_djSbA@T3
-I5ch?^I=JaV13[XeSC99:_1
-S1
-R9
-w1786390335
-Z19 8Wrapper.sv
-Z20 FWrapper.sv
-!i122 70
-L0 1 41
-R11
-R12
-r1
-!s85 0
-31
-!s108 1786390344.000000
-!s107 Wrapper.sv|tb_fft_16pt_top.sv|SR.sv|Register.sv|RAM_wrapper.sv|RAM.sv|mux_2_1_32bit.sv|fxpt_addsub_tb.sv|fxpt_addsub.sv|FFT_wrapper.sv|counter.sv|comp_mult.sv|Clk_div.sv|Butterfly_tb.sv|Butterfly.sv|bit_reversal.sv|
-!s90 bit_reversal.sv|Butterfly.sv|Butterfly_tb.sv|Clk_div.sv|comp_mult.sv|counter.sv|FFT_wrapper.sv|fxpt_addsub.sv|fxpt_addsub_tb.sv|mux_2_1_32bit.sv|RAM.sv|RAM_wrapper.sv|Register.sv|SR.sv|tb_fft_16pt_top.sv|Wrapper.sv|
-!i113 0
-R15
-R4
+R5
 vWrapper
 R7
 R8
@@ -521,46 +463,46 @@ R8
 !s100 Uf<U^^59eSmClilhO@0eF1
 II>CSRa_OOZ0YR5NkGLLF71
 S1
-R9
+R1
 w1786479810
-R19
-R20
-!i122 157
+8Wrapper.sv
+FWrapper.sv
+!i122 8
 L0 1 42
+R10
 R11
-R12
 r1
 !s85 0
 31
+R12
 R13
-R16
 R14
 !i113 0
 R15
-R4
+R5
 n@wrapper
 vWrapper_tb
 R7
 R8
 !i10b 1
-!s100 5JiVSHk5K4>cUclC@caXL1
-In7zN4_0j2jK68:KnHK4nb1
+!s100 K@Y]3zC?7f9A8Vh`zTVln0
+If``8h@0CKQOgZ;6Q68kDg2
 S1
-R9
-w1786481601
+R1
+w1786554073
 8Wrapper_tb.sv
 FWrapper_tb.sv
-!i122 157
-L0 3 145
+!i122 8
+L0 3 152
+R10
 R11
-R12
 r1
 !s85 0
 31
+R12
 R13
-R16
 R14
 !i113 0
 R15
-R4
+R5
 n@wrapper_tb
