@@ -1,0 +1,13 @@
+../RTL/FFT_block/Butterfly.sv
+../RTL/FFT_block/comp_mult.sv
+../RTL/FFT_block/counter.sv
+../RTL/FFT_block/FFT_wrapper.sv
+../RTL/FFT_block/fxpt_addsub.sv
+../RTL/FFT_block/mux_2_1_32bit.sv
+../RTL/FFT_block/SR.sv
+../RTL/RAM_block/bit_reversal.sv
+../RTL/RAM_block/counter.sv
+../RTL/RAM_block/RAM_wrapper.sv
+../RTL/RAM_block/RAM.sv
+../RTL/Register.sv
+../RTL/Wrapper.sv

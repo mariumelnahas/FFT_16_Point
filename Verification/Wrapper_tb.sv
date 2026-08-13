@@ -44,15 +44,15 @@ module Wrapper_tb;
         real got_r, got_i, abs_got_i;
         string exp_sign, got_sign;
         real err_r, err_i;
-        real max_err_r = 0.0;
-        real max_err_i = 0.0;
+        automatic real max_err_r = 0.0;
+        automatic real max_err_i = 0.0;
 
         integer fd_rtl;
         // 1. Load the binary text files into the memory arrays
-        $readmemb("Verification/golden_fft_inputs.txt", mem_in);
-        $readmemb("Verification/golden_fft_outputs.txt", mem_out);
+        $readmemb("golden_fft_inputs.txt", mem_in);
+        $readmemb("golden_fft_outputs.txt", mem_out);
 
-        fd_rtl = $fopen("Verification/rtl_outputs.txt", "w");
+        fd_rtl = $fopen("rtl_outputs.txt", "w");
         if (fd_rtl == 0) begin
             $display("Error: Could not open rtl_outputs.txt for writing!");
             $stop;

@@ -1,8 +1,7 @@
 `timescale 1ns / 1ps
 
-module tb_fft_16pt_top;
+module FFT_wrapper_tb;
 
-    // Parameters
     parameter integer WIDTH = 16;
     // 100 seeds * 16 cycles per block
     parameter integer NUM_TESTS = 1615; 
@@ -20,7 +19,7 @@ module tb_fft_16pt_top;
     int errors;
 
     // Instantiate the Unit Under Test (UUT)
-    fft_16pt_top #(
+    FFT_wrapper #(
         .WIDTH(WIDTH)
     ) uut (
         .clk(clk),
@@ -43,8 +42,8 @@ module tb_fft_16pt_top;
         real got_r, got_i, abs_got_i;
         string exp_sign, got_sign;
         real err_r, err_i;
-        real max_err_r = 0.0;
-        real max_err_i = 0.0;
+        automatic real max_err_r = 0.0;
+        automatic real max_err_i = 0.0;
         // 1. Load the binary text files into the memory arrays
         $readmemb("fft_inputs.txt", mem_in);
         $readmemb("fft_outputs.txt", mem_out);
