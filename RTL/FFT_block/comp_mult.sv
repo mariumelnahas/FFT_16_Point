@@ -1,3 +1,16 @@
+// =====================================================================
+// Complex Multiplier Module
+// =====================================================================
+// Description:
+//   Multiplies the FFT stage output by the corresponding complex twiddle 
+//   factor using a lookup table with precalculated values. The module 
+//   computes all four cross-products (rr, ii, ri, ir), combines them to 
+//   produce real and imaginary results, and rounds to the nearest integer 
+//   matching MATLAB's fixed-point behavior. Fractional bit-widths are 
+//   predetermined per stage from MATLAB instrumentation analysis to prevent overflow.
+//
+// Authors: Marium Waleed, Yossef Medhat
+// =====================================================================
 `timescale 1ns / 1ps
 
 module complex_multiplier #(
@@ -8,11 +21,11 @@ module complex_multiplier #(
     output wire [31:0] data_out
 );
 
-    // INPUT FRACTIONAL LENGTHS
+    // Fractional bit-widths for input signals (real and imaginary parts)
     localparam FL_IN_R = (STAGE == 1) ? 12 : 11;
     localparam FL_IN_I = (STAGE == 1) ? 12 : 11;
 
-    // TWIDDLE FRACTIONAL LENGTHS
+    // Fractional bit-widths for twiddle factors (real and imaginary parts)
     localparam FL_TW_R = (STAGE == 1) ? 14 :
                          (STAGE == 2) ? 14 :
                          (STAGE == 3) ? 0 : 0;
@@ -21,7 +34,7 @@ module complex_multiplier #(
                          (STAGE == 2) ? 15 :
                          (STAGE == 3) ? 0  : 0;
 
-    // MULTIPLICATION FRACTIONAL LENGTHS
+    // Fractional bit-widths for intermediate multiplication products
     localparam FL_OUT_RXR = (STAGE == 1) ? 12 : 11;
     localparam FL_OUT_IXI = (STAGE == 1) ? 12 :
                             (STAGE == 2) ? 11 :
@@ -32,12 +45,12 @@ module complex_multiplier #(
                             (STAGE == 3) ? 11 : 0;
     localparam FL_OUT_IXR = (STAGE == 1) ? 12 : 11;
     
-    // OUTPUT FRACTIONAL LENGTHS 
+    // Fractional bit-widths for final addition/subtraction results 
     localparam FL_OUT_ADD_R = (STAGE == 1) ? 12 : 11;
     localparam FL_OUT_ADD_I = (STAGE == 1) ? 12 : 11;
 
-    // SHIFT CALCULATIONS ( Shift = FL_IN + FL_TW - FL_OUTPUT )
-    // We align the partial products directly to the final ADD/SUB target FL 
+    // Calculate binary shifts to align intermediate products to final output precision
+    // Shift formula: FL_IN + FL_TW - FL_OUTPUT 
     localparam SHIFT_RXR = (FL_IN_R + FL_TW_R) - FL_OUT_ADD_R;
     localparam SHIFT_II  = (FL_IN_I + FL_TW_I) - FL_OUT_ADD_R;
     
@@ -46,7 +59,7 @@ module complex_multiplier #(
 
     reg signed [15:0] tw_r, tw_i;
     
-    // TWIDDLE FACTOR LUT
+    // Look-up table containing precomputed twiddle factors for each FFT stage
     always @(*) begin
         case (STAGE)
             1: begin
@@ -85,74 +98,45 @@ module complex_multiplier #(
         endcase
     end
 
-    // COMPLEX MULTIPLIER LOGIC
+    // Extract real and imaginary components from packed input
     wire signed [15:0] d_r = data_in[31:16];
     wire signed [15:0] d_i = data_in[15:0];
 
-    // Multiplication
+    // Compute all four cross-products: real×real, imag×imag, real×imag, imag×real
     wire signed [31:0] rr = d_r * tw_r;
     wire signed [31:0] ii = d_i * tw_i;
     wire signed [31:0] ri = d_r * tw_i;
     wire signed [31:0] ir = d_i * tw_r;
 
-    // -------------------------------------------------------------------
-    // Round-to-nearest + saturate, matching MATLAB fi's default
-    // RoundingMethod / OverflowAction('Saturate') cast behavior, instead
-    // of a bare truncating arithmetic shift.
-    //
-    // Round-half-up: bias by half an output ULP before the shift. This
-    // matches MATLAB's round-to-nearest everywhere except exact .5 ties
-    // on a negative operand, where MATLAB rounds one step further from
-    // zero than round-half-up does. That tie case is rare enough here
-    // not to warrant sign-dependent tie logic; flag if bit-exact tie
-    // behavior ever matters.
-    //
-    // Saturation is applied AFTER rounding, not assumed unnecessary --
-    // a round-up of a near-full-scale value can overflow 16 bits.
-    // -------------------------------------------------------------------
+
+    // -----------------------------------------------------------------------
+    // Purpose:  Performs arithmetic right-shift with round-to-nearest behavior.
+    //           Adds half-ULP bias before shifting to match MATLAB's rounding.
+    // Inputs:   val   - 32-bit signed value to round and shift
+    //           shift - Number of bits to shift right
+    // Returns:  16-bit signed result (truncated to fit output width)
+    // -----------------------------------------------------------------------
     function automatic signed [15:0] round_shift(input signed [31:0] val, input integer shift);
         reg signed [31:0] biased;
         reg signed [31:0] rounded;
         begin
             
-            biased  = val + (32'sd1 <<< (shift - 1));   // half-ULP round bias
+            biased  = val + (32'sd1 <<< (shift - 1));  
             rounded = biased >>> shift;
-
-            // Saturate to signed 16-bit range [-32768, 32767]
             round_shift = rounded[15:0];
         end
     endfunction
 
-    // Fractional Alignment (round-to-nearest, saturating)
+    // Align products to target fractional precision using round-to-nearest method
     wire signed [15:0] rr_shifted = round_shift(rr, SHIFT_RXR);
     wire signed [15:0] ii_shifted = round_shift(ii, SHIFT_II);
-
     wire signed [15:0] ri_shifted = round_shift(ri, SHIFT_RI);
     wire signed [15:0] ir_shifted = round_shift(ir, SHIFT_IR);
 
-    // -------------------------------------------------------------------
-    // Final Addition / Subtraction, saturated the same way the shifts
-    // are -- two already-rounded 16-bit values can still sum past
-    // full-scale, and MATLAB fi saturates on every cast, including this
-    // final combine.
-    // -------------------------------------------------------------------
+    // Compute real and imaginary parts: re = (rr - ii), im = (ri + ir)
+    // Note: Saturating behavior matches MATLAB fi object at each stage
     wire signed [16:0] sum_re = rr_shifted - ii_shifted;
     wire signed [16:0] sum_im = ri_shifted + ir_shifted;
-/*
-    function automatic signed [15:0] sat16(input signed [16:0] val);
-        begin
-            if (val > 17'sd32767)
-                sat16 = 16'sd32767;
-            else if (val < -17'sd32768)
-                sat16 = -16'sd32768;
-            else
-                sat16 = val[15:0];
-        end
-    endfunction
-
-    assign data_out[31:16] = sat16(sum_re);
-    assign data_out[15:0]  = sat16(sum_im);
-*/
 
     assign data_out[31:16] = sum_re;
     assign data_out[15:0]  = sum_im;

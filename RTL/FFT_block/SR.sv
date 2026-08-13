@@ -1,3 +1,13 @@
+// =====================================================================
+// Shift Register Module (32-bit)
+// =====================================================================
+// Description:
+//   A parameterized shift register for 32-bit data paths used by the 
+//   FFT module. Depth is determined by the FFT stage: Stage 1 has 8 
+//   stages, Stage 2 has 4, Stage 3 has 2, and Stage 4 has 1.
+//
+// Authors: Marium Waleed, Yossef Medhat
+// =====================================================================
 `timescale 1ns / 1ps
 
 module shift_register #(

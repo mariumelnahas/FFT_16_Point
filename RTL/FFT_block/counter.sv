@@ -1,3 +1,14 @@
+// =====================================================================
+// Counter Module (4-bit)
+// =====================================================================
+// Description:
+//   A modular counter that generates select signals for multiplexer 
+//   inputs at each FFT stage. Functionally equivalent to cascaded 
+//   clock dividers with outputs tapped after each division stage.
+//   Includes asynchronous reset and count enable control.
+//
+// Authors: Marium Waleed, Yossef Medhat
+// =====================================================================
 module counter_4 #(
     parameter LENGTH = 4
 )(

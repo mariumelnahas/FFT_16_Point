@@ -1,3 +1,17 @@
+// =====================================================================
+// FFT Wrapper Module (16-point SDF Architecture)
+// =====================================================================
+// Description:
+//   Top-level wrapper for a 16-point Single Delay Feedback (SDF) FFT 
+//   implementation. Integrates four pipelined stages, each containing 
+//   a butterfly computation, shift register for data recirculation, and 
+//   twiddle factor multiplication. Includes fractional bit-width alignments
+//   at stage boundaries to prevent overflow while maintaining MATLAB-
+//   matching numerical behavior. The counter generates multiplexer select 
+//   signals synchronized across all stages.
+//
+// Authors: Marium Waleed, Yossef Medhat
+// =====================================================================
 `timescale 1ns / 1ps
 
 module FFT_wrapper #(
@@ -10,12 +24,16 @@ module FFT_wrapper #(
     output wire [2*WIDTH-1:0]        out_sample
 );
 
+    // System reset (active-high) from inverted bit-stream enable
     wire sys_rst = ~BS;
-    //wire gclk    = clk & BS;
 
+    // Generate twiddle factor select counter
+    // Runs on inverted clock for proper synchronization
     wire [3:0] tw_count;
     counter_4 u_tw_counter (.clk(~clk), .rst(sys_rst), .en(1'b1), .count(tw_count));
 
+    // Derive stage-specific mux select signals from counter bits
+    // Each stage uses different counter bits for timing alignment
     wire sel4 = ~tw_count[0];
     wire sel3 = ~tw_count[1];
     wire sel2 = ~tw_count[2];
@@ -34,30 +52,27 @@ module FFT_wrapper #(
     assign stage_in_3 = mult_out_2;
     assign stage_in_4 = mult_out_3;
 
-    // -------------------------------------------------------------------
-    // Round-to-nearest + saturate for the fixed 1-bit FL realignments
-    // below (each one drops exactly 1 fractional bit), matching MATLAB
-    // fi's default RoundingMethod/OverflowAction('Saturate') cast
-    // behavior instead of a bare truncating >>>1.
-    // Half-ULP bias for a 1-bit drop is exactly +1 before the shift.
-    // -------------------------------------------------------------------
     
+    // -----------------------------------------------------------------------
+    // Function: round_shift1
+    // Purpose:  Right-shift by 1 with round-to-nearest behavior.
+    //           Used for fractional length conversions between stages.
+    // -----------------------------------------------------------------------
     function automatic signed [15:0] round_shift1(input signed [15:0] val);
         reg signed [16:0] biased;
-        begin
-            biased = {val[15], val} + 17'sd1;   // sign-extend to 17b, add half-ULP round bias
-            round_shift1 = biased >>> 1;         // floor(biased/2); implicit truncation to 16b is safe (see above)
-        end
+        biased = {val[15], val} + 17'sd1;   // sign-extend to 17b, add half-ULP round bias
+        round_shift1 = biased >>> 1;         // floor(biased/2); implicit truncation to 16b is safe (see above)
     endfunction
     
 
-    // STAGE 1 (SR Delay = 8)
-    // stage_in_1 is FL13. SR1 expects FL12.
+    // ========================================================================
+    // STAGE 1: 8-point SDF (SR Delay = 8)
+    // Input FL13 → Align to FL12 for SR and butterfly operations
+    // ========================================================================
+    // Fractional length adjustment: divide by 2 to convert FL13 → FL12
     wire [2*WIDTH-1:0] stage_in_1_algnd = { 
         round_shift1(stage_in_1[31:16]), 
         round_shift1(stage_in_1[15:0]) 
-        // stage_in_1[31:16], 
-        // stage_in_1[15:0]
     };
 
     butterfly #(.STAGE(1), .WIDTH(WIDTH)) u_bfly_1 (
@@ -73,18 +88,20 @@ module FFT_wrapper #(
     shift_register #(.STAGE(1)) u_sr_1 (.clk(clk), .reset(sys_rst), .d(bot_mux_out_1), .q(sr_q_1));
     complex_multiplier #(.STAGE(1)) u_mult_1 (.idx(tw_count), .data_in(top_mux_out_1), .data_out(mult_out_1));
 
-    // STAGE 2 (SR Delay = 4)
-    // bfly_diff_2 is FL11. SR2 expects FL12.
+    // ========================================================================
+    // STAGE 2: 4-point SDF (SR Delay = 4)
+    // Butterfly output FL11 → Align to FL12 for SR (left-shift 1)
+    // SR output FL12 → Align to FL11 for multiplier (right-shift 1)
+    // ========================================================================
+    // Fractional length alignment: butterfly output FL11 → FL12 (left-shift 1)
     wire [2*WIDTH-1:0] bfly_diff_2_algnd = {
         $signed(bfly_diff_2[31:16]) <<< 1,
         $signed(bfly_diff_2[15:0])  <<< 1
     };
-    // sr_q_2 is FL12. comp_mult_2 expects FL11.
+    // Fractional length alignment: SR output FL12 → FL11 (right-shift 1)
     wire [2*WIDTH-1:0] sr_q_2_algnd = {
         round_shift1(sr_q_2[31:16]),
         round_shift1(sr_q_2[15:0])
-        // sr_q_2[31:16],
-        // sr_q_2[15:0]
     };
 
     butterfly #(.STAGE(2), .WIDTH(WIDTH)) u_bfly_2 (
@@ -100,8 +117,10 @@ module FFT_wrapper #(
     shift_register #(.STAGE(2)) u_sr_2 (.clk(clk), .reset(sys_rst), .d(bot_mux_out_2), .q(sr_q_2));
     complex_multiplier #(.STAGE(2)) u_mult_2 (.idx(tw_count), .data_in(top_mux_out_2), .data_out(mult_out_2));
 
-    // STAGE 3 (SR Delay = 2)
-    // All inputs natively FL11. No alignment needed.
+    // ========================================================================
+    // STAGE 3: 2-point SDF (SR Delay = 2)
+    // All signals natively FL11. No fractional length alignment required.
+    // ========================================================================
     butterfly #(.STAGE(3), .WIDTH(WIDTH)) u_bfly_3 (
         .top_in  (sr_q_3),
         .bot_in  (stage_in_3),
@@ -116,14 +135,20 @@ module FFT_wrapper #(
     complex_multiplier #(.STAGE(3)) u_mult_3 (.idx(tw_count), .data_in(top_mux_out_3), .data_out(mult_out_3));
 
 
-    // STAGE 4 (SR Delay = 1)
-    // bfly_diff_4 has Real FL10, Imag FL11. SR4 expects FL11.
+    // ========================================================================
+    // STAGE 4: Final Butterfly (SR Delay = 1)
+    // Butterfly real FL10 → Align to FL11 (left-shift 1)
+    // Butterfly imag FL11 → No alignment needed
+    // ========================================================================
+    // Fractional length alignment: real part FL10 → FL11 (left-shift 1)
+    // Imaginary part already FL11, no adjustment needed
     wire [2*WIDTH-1:0] bfly_diff_4_algnd = {
         $signed(bfly_diff_4[31:16]) <<< 1,
         bfly_diff_4[15:0] 
     };
 
-    // bfly_sum_4 has Real FL10, Imag FL11. Output expects FL11.
+    // Fractional length alignment: real part FL10 → FL11 (left-shift 1)
+    // Imaginary part already FL11, no adjustment needed
     wire [2*WIDTH-1:0] bfly_sum_4_algnd = {
         $signed(bfly_sum_4[31:16]) <<< 1,
         bfly_sum_4[15:0] 
@@ -141,6 +166,7 @@ module FFT_wrapper #(
 
     shift_register #(.STAGE(4)) u_sr_4 (.clk(clk), .reset(sys_rst), .d(bot_mux_out_4), .q(sr_q_4));
 
+    // Final output: select upper-path result from Stage 4
     assign out_sample = top_mux_out_4;
 
 endmodule
