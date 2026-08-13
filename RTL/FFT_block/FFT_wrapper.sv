@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module fft_16pt_top #(
+module FFT_wrapper #(
     parameter integer WIDTH = 16
 )(
     input  wire                      clk,
