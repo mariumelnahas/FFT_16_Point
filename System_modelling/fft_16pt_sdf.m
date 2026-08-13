@@ -40,27 +40,27 @@ for clk = 0 : num_cycles - 1
         idx = mod(clk, 8) + 1;
         tw1_r = cast(real(W16(idx)), 'like', T.tw1_r); 
         tw1_i = cast(imag(W16(idx)), 'like', T.tw1_i);
+
+        stage1_mult_out_rxr = cast(mux1_bot_r * tw1_r, 'like', T.stage1_mult_out_rxr);
+        stage1_mult_out_ixi = cast(mux1_bot_i * tw1_i, 'like', T.stage1_mult_out_ixi);
+        stage1_mult_out_ixr = cast(mux1_bot_i * tw1_r, 'like', T.stage1_mult_out_ixr);
+        stage1_mult_out_rxi = cast(mux1_bot_r * tw1_i, 'like', T.stage1_mult_out_rxi);
+
+        stage1_mult_add_out_r = cast(stage1_mult_out_rxr - stage1_mult_out_ixi, 'like', T.stage1_mult_add_out_r);
+        stage1_mult_add_out_i = cast(stage1_mult_out_ixr + stage1_mult_out_rxi, 'like', T.stage1_mult_add_out_i);
     else
-        % Outputting Current ADD -> Twiddle is exactly 1
+        % Outputting Current ADD -> Twiddle is exactly 1 -> bypass the multiplier entirely
         mux1_top_r = cast(stage1_sub_out_r, 'like', T.sr1_r); 
         mux1_top_i = cast(stage1_sub_out_i, 'like', T.sr1_i);
         mux1_bot_r = cast(stage1_add_out_r, 'like', T.stage1_add_out_r); 
         mux1_bot_i = cast(stage1_add_out_i, 'like', T.stage1_add_out_i);
-        
-        tw1_r = cast(1, 'like', T.tw1_r); 
-        tw1_i = cast(0, 'like', T.tw1_i);
+
+        stage1_mult_add_out_r = cast(mux1_bot_r, 'like', T.stage1_mult_add_out_r);
+        stage1_mult_add_out_i = cast(mux1_bot_i, 'like', T.stage1_mult_add_out_i);
     end
     
     sr1_r = [mux1_top_r, sr1_r(1:end-1)];
     sr1_i = [mux1_top_i, sr1_i(1:end-1)];
-    
-    stage1_mult_out_rxr = cast(mux1_bot_r * tw1_r, 'like', T.stage1_mult_out_rxr);
-    stage1_mult_out_ixi = cast(mux1_bot_i * tw1_i, 'like', T.stage1_mult_out_ixi);
-    stage1_mult_out_ixr = cast(mux1_bot_i * tw1_r, 'like', T.stage1_mult_out_ixr);
-    stage1_mult_out_rxi = cast(mux1_bot_r * tw1_i, 'like', T.stage1_mult_out_rxi);
-    
-    stage1_mult_add_out_r = cast(stage1_mult_out_rxr - stage1_mult_out_ixi, 'like', T.stage1_mult_add_out_r);
-    stage1_mult_add_out_i = cast(stage1_mult_out_ixr + stage1_mult_out_rxi, 'like', T.stage1_mult_add_out_i);
 
     % =====================================================================
     % STAGE 2 (Delay = 4)
@@ -82,27 +82,27 @@ for clk = 0 : num_cycles - 1
         idx = mod(clk, 4) + 1;
         tw2_r = cast(real(W8(idx)), 'like', T.tw2_r);  
         tw2_i = cast(imag(W8(idx)), 'like', T.tw2_i);
+
+        stage2_mult_out_rxr = cast(mux2_bot_r * tw2_r, 'like', T.stage2_mult_out_rxr);
+        stage2_mult_out_ixi = cast(mux2_bot_i * tw2_i, 'like', T.stage2_mult_out_ixi);
+        stage2_mult_out_ixr = cast(mux2_bot_i * tw2_r, 'like', T.stage2_mult_out_ixr);
+        stage2_mult_out_rxi = cast(mux2_bot_r * tw2_i, 'like', T.stage2_mult_out_rxi);
+
+        stage2_mult_add_out_r = cast(stage2_mult_out_rxr - stage2_mult_out_ixi, 'like', T.stage2_mult_add_out_r);
+        stage2_mult_add_out_i = cast(stage2_mult_out_ixr + stage2_mult_out_rxi, 'like', T.stage2_mult_add_out_i);
     else
-        % Outputting Current ADD -> Twiddle is exactly 1
+        % Outputting Current ADD -> Twiddle is exactly 1 -> bypass the multiplier entirely
         mux2_top_r = cast(stage2_sub_out_r, 'like', T.sr2_r);      
         mux2_top_i = cast(stage2_sub_out_i, 'like', T.sr2_i);
         mux2_bot_r = cast(stage2_add_out_r, 'like', T.stage2_add_out_r);      
         mux2_bot_i = cast(stage2_add_out_i, 'like', T.stage2_add_out_i);
-        
-        tw2_r = cast(1, 'like', T.tw2_r);      
-        tw2_i = cast(0, 'like', T.tw2_i);
+
+        stage2_mult_add_out_r = cast(mux2_bot_r, 'like', T.stage2_mult_add_out_r);
+        stage2_mult_add_out_i = cast(mux2_bot_i, 'like', T.stage2_mult_add_out_i);
     end
     
     sr2_r = [mux2_top_r, sr2_r(1:end-1)];
     sr2_i = [mux2_top_i, sr2_i(1:end-1)];
-    
-    stage2_mult_out_rxr = cast(mux2_bot_r * tw2_r, 'like', T.stage2_mult_out_rxr);
-    stage2_mult_out_ixi = cast(mux2_bot_i * tw2_i, 'like', T.stage2_mult_out_ixi);
-    stage2_mult_out_ixr = cast(mux2_bot_i * tw2_r, 'like', T.stage2_mult_out_ixr);
-    stage2_mult_out_rxi = cast(mux2_bot_r * tw2_i, 'like', T.stage2_mult_out_rxi);
-    
-    stage2_mult_add_out_r = cast(stage2_mult_out_rxr - stage2_mult_out_ixi, 'like', T.stage2_mult_add_out_r);
-    stage2_mult_add_out_i = cast(stage2_mult_out_ixr + stage2_mult_out_rxi, 'like', T.stage2_mult_add_out_i);
 
     % =====================================================================
     % STAGE 3 (Delay = 2)
@@ -124,27 +124,27 @@ for clk = 0 : num_cycles - 1
         idx = mod(clk, 2) + 1;
         tw3_r = cast(real(W4(idx)), 'like', T.tw3_r);              
         tw3_i = cast(imag(W4(idx)), 'like', T.tw3_i);
+
+        stage3_mult_out_rxr = cast(mux3_bot_r * tw3_r, 'like', T.stage3_mult_out_rxr);
+        stage3_mult_out_ixi = cast(mux3_bot_i * tw3_i, 'like', T.stage3_mult_out_ixi);
+        stage3_mult_out_ixr = cast(mux3_bot_i * tw3_r, 'like', T.stage3_mult_out_ixr);
+        stage3_mult_out_rxi = cast(mux3_bot_r * tw3_i, 'like', T.stage3_mult_out_rxi);
+
+        stage3_mult_add_out_r = cast(stage3_mult_out_rxr - stage3_mult_out_ixi, 'like', T.stage3_mult_add_out_r);
+        stage3_mult_add_out_i = cast(stage3_mult_out_ixr + stage3_mult_out_rxi, 'like', T.stage3_mult_add_out_i);
     else
-        % Outputting Current ADD -> Twiddle is exactly 1
+        % Outputting Current ADD -> Twiddle is exactly 1 -> bypass the multiplier entirely
         mux3_top_r = cast(stage3_sub_out_r, 'like', T.sr3_r);      
         mux3_top_i = cast(stage3_sub_out_i, 'like', T.sr3_i);
         mux3_bot_r = cast(stage3_add_out_r, 'like', T.stage3_add_out_r);      
         mux3_bot_i = cast(stage3_add_out_i, 'like', T.stage3_add_out_i);
-        
-        tw3_r = cast(1, 'like', T.tw3_r);      
-        tw3_i = cast(0, 'like', T.tw3_i);
+
+        stage3_mult_add_out_r = cast(mux3_bot_r, 'like', T.stage3_mult_add_out_r);
+        stage3_mult_add_out_i = cast(mux3_bot_i, 'like', T.stage3_mult_add_out_i);
     end
     
     sr3_r = [mux3_top_r, sr3_r(1:end-1)];
     sr3_i = [mux3_top_i, sr3_i(1:end-1)];
-    
-    stage3_mult_out_rxr = cast(mux3_bot_r * tw3_r, 'like', T.stage3_mult_out_rxr);
-    stage3_mult_out_ixi = cast(mux3_bot_i * tw3_i, 'like', T.stage3_mult_out_ixi);
-    stage3_mult_out_ixr = cast(mux3_bot_i * tw3_r, 'like', T.stage3_mult_out_ixr);
-    stage3_mult_out_rxi = cast(mux3_bot_r * tw3_i, 'like', T.stage3_mult_out_rxi);
-    
-    stage3_mult_add_out_r = cast(stage3_mult_out_rxr - stage3_mult_out_ixi, 'like', T.stage3_mult_add_out_r);
-    stage3_mult_add_out_i = cast(stage3_mult_out_ixr + stage3_mult_out_rxi, 'like', T.stage3_mult_add_out_i);
 
     % =====================================================================
     % STAGE 4 (Delay = 1)
@@ -168,20 +168,12 @@ for clk = 0 : num_cycles - 1
         mux4_bot_i = cast(stage4_add_out_i,      'like', T.stage4_add_out_i);
     end
     
-    % The final stage never requires a twiddle multiplier mathematically
-    tw4_r = cast(1, 'like', T.tw4_r); 
-    tw4_i = cast(0, 'like', T.tw4_i);
-    
     sr4_r = [mux4_top_r, sr4_r(1:end-1)];
     sr4_i = [mux4_top_i, sr4_i(1:end-1)];
     
-    stage4_mult_out_rxr = cast(mux4_bot_r * tw4_r, 'like', T.stage4_mult_out_rxr);
-    stage4_mult_out_ixi = cast(mux4_bot_i * tw4_i, 'like', T.stage4_mult_out_ixi);
-    stage4_mult_out_ixr = cast(mux4_bot_i * tw4_r, 'like', T.stage4_mult_out_ixr);
-    stage4_mult_out_rxi = cast(mux4_bot_r * tw4_i, 'like', T.stage4_mult_out_rxi);
-    
-    stage4_mult_add_out_r = cast(stage4_mult_out_rxr - stage4_mult_out_ixi, 'like', T.stage4_mult_add_out_r);
-    stage4_mult_add_out_i = cast(stage4_mult_out_ixr + stage4_mult_out_rxi, 'like', T.stage4_mult_add_out_i);
+    % The final stage never requires a twiddle multiplier mathematically -> bypass directly.
+    stage4_mult_add_out_r = cast(mux4_bot_r, 'like', T.stage4_mult_add_out_r);
+    stage4_mult_add_out_i = cast(mux4_bot_i, 'like', T.stage4_mult_add_out_i);
     
     % =====================================================================
     % OUTPUT CAPTURE

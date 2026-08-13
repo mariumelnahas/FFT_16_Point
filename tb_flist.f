@@ -1,0 +1,5 @@
+Verification/Butterfly_tb.sv
+Verification/tb_fft_16pt_top.sv
+Verification/Wrapper_tb.sv
+Verification/compare_files.sv
+Verification/fxpt_addsub_tb.sv
