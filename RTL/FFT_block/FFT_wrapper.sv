@@ -51,19 +51,7 @@ module FFT_wrapper #(
     assign stage_in_2 = mult_out_1;
     assign stage_in_3 = mult_out_2;
     assign stage_in_4 = mult_out_3;
-
-    
-    // -----------------------------------------------------------------------
-    // Function: round_shift1
-    // Purpose:  Right-shift by 1 with round-to-nearest behavior.
-    //           Used for fractional length conversions between stages.
-    // -----------------------------------------------------------------------
-    function automatic signed [15:0] round_shift1(input signed [15:0] val);
-        reg signed [16:0] biased;
-        biased = {val[15], val} + 17'sd1;   // sign-extend to 17b, add half-ULP round bias
-        round_shift1 = biased >>> 1;         // floor(biased/2); implicit truncation to 16b is safe (see above)
-    endfunction
-    
+  
 
     // ========================================================================
     // STAGE 1: 8-point SDF (SR Delay = 8)
@@ -71,8 +59,8 @@ module FFT_wrapper #(
     // ========================================================================
     // Fractional length adjustment: divide by 2 to convert FL13 → FL12
     wire [2*WIDTH-1:0] stage_in_1_algnd = { 
-        round_shift1(stage_in_1[31:16]), 
-        round_shift1(stage_in_1[15:0]) 
+        (stage_in_1[31:16]), 
+        (stage_in_1[15:0])
     };
 
     butterfly #(.STAGE(1), .WIDTH(WIDTH)) u_bfly_1 (
@@ -100,8 +88,8 @@ module FFT_wrapper #(
     };
     // Fractional length alignment: SR output FL12 → FL11 (right-shift 1)
     wire [2*WIDTH-1:0] sr_q_2_algnd = {
-        round_shift1(sr_q_2[31:16]),
-        round_shift1(sr_q_2[15:0])
+        (sr_q_2[31:16]),
+        (sr_q_2[15:0])
     };
 
     butterfly #(.STAGE(2), .WIDTH(WIDTH)) u_bfly_2 (

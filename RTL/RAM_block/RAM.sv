@@ -9,13 +9,6 @@ module RAM (
 
     // Memory array: 16 memory slots, each 32 bits wide
     reg [31:0] mem [0:15];
-    
-    integer i;
-
-    initial begin
-        for (i = 0; i < 16; i = i + 1)
-            mem[i] = 32'h0;
-    end
 
     assign dout = (rst) ? 32'h0 : (~we) ? mem[addr] : 32'bz; // Tri-state output for read operation
 

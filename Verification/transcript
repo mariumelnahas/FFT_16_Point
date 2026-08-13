@@ -5,7 +5,7 @@
 # vmap work work 
 # Modifying modelsim.ini
 # QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
-# Start time: 17:13:42 on Aug 13,2026
+# Start time: 17:51:41 on Aug 13,2026
 # vlog -sv -cover bcesf -f rtl_flist.f 
 # -- Compiling module butterfly
 # -- Compiling module complex_multiplier
@@ -24,10 +24,10 @@
 # Top level modules:
 # 	FFT_wrapper
 # 	Wrapper
-# End time: 17:13:42 on Aug 13,2026, Elapsed time: 0:00:00
+# End time: 17:51:42 on Aug 13,2026, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
-# Start time: 17:13:42 on Aug 13,2026
+# Start time: 17:51:42 on Aug 13,2026
 # vlog -sv -f tb_flist.f 
 # -- Compiling module Butterfly_tb
 # -- Compiling module FFT_wrapper_tb
@@ -41,10 +41,10 @@
 # 	Wrapper_tb
 # 	compare_files
 # 	fxpt_addsub_tb
-# End time: 17:13:42 on Aug 13,2026, Elapsed time: 0:00:00
+# End time: 17:51:42 on Aug 13,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vopt 2021.1 Compiler 2021.01 Jan 19 2021
-# Start time: 17:13:42 on Aug 13,2026
+# Start time: 17:51:42 on Aug 13,2026
 # vopt "+cover=bcesf" -o Wrapper_tb_opt work.Wrapper_tb 
 # 
 # Top level modules:
@@ -65,41 +65,12 @@
 # -- Loading module counter
 # -- Loading module bit_reversal
 # -- Loading module RAM
-# Incremental compilation check found 11 design-units (out of 29) may be reused.
-# Optimizing 18 design-units (inlining 43/45 module instances):
-# -- Inlining module counter_4(fast)
-# -- Inlining module fxpt_addsub(fast)
-# -- Inlining module fxpt_addsub(fast__1)
-# -- Inlining module butterfly(fast)
-# -- Inlining module mux_2_1_32bit(fast)
-# -- Inlining module shift_register(fast)
-# -- Inlining module complex_multiplier(fast)
-# -- Inlining module fxpt_addsub(fast__2)
-# -- Inlining module fxpt_addsub(fast__3)
-# -- Inlining module butterfly(fast__1)
-# -- Inlining module shift_register(fast__1)
-# -- Inlining module complex_multiplier(fast__1)
-# -- Inlining module fxpt_addsub(fast__4)
-# -- Inlining module fxpt_addsub(fast__5)
-# -- Inlining module butterfly(fast__2)
-# -- Inlining module shift_register(fast__2)
-# -- Inlining module complex_multiplier(fast__2)
-# -- Inlining module fxpt_addsub(fast__6)
-# -- Inlining module fxpt_addsub(fast__7)
-# -- Inlining module butterfly(fast__3)
-# -- Inlining module shift_register(fast__3)
-# -- Inlining module fft_16pt_top(fast)
-# -- Inlining module register(fast)
-# -- Inlining module counter(fast)
-# -- Inlining module bit_reversal(fast)
-# -- Inlining module RAM(fast)
-# -- Inlining module ram_wrapper(fast)
-# -- Optimizing module Wrapper(fast)
+# Incremental compilation check found no design-units have changed.
 # Optimized design name is Wrapper_tb_opt
-# End time: 17:13:43 on Aug 13,2026, Elapsed time: 0:00:01
+# End time: 17:51:42 on Aug 13,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -coverage Wrapper_tb_opt 
-# Start time: 17:13:43 on Aug 13,2026
+# Start time: 17:51:42 on Aug 13,2026
 # //  Questa Sim-64
 # //  Version 2021.1 win64 Jan 19 2021
 # //
@@ -118,22 +89,22 @@
 # Loading work.Wrapper_tb(fast)
 # Loading work.Wrapper(fast)
 # --- Starting FFT 16-pt Top-Level Verification ---
-# Cycle    0 RAM cnt 0 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
-# Cycle    1 RAM cnt 1 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
-# Cycle    2 RAM cnt 2 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
-# Cycle    3 RAM cnt 3 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
-# Cycle    4 RAM cnt 4 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
-# Cycle    5 RAM cnt 5 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
-# Cycle    6 RAM cnt 6 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
-# Cycle    7 RAM cnt 7 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
-# Cycle    8 RAM cnt 8 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
-# Cycle    9 RAM cnt 9 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
-# Cycle   10 RAM cnt 10 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
-# Cycle   11 RAM cnt 11 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
-# Cycle   12 RAM cnt 12 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
-# Cycle   13 RAM cnt 13 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
-# Cycle   14 RAM cnt 14 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
-# Cycle   15 RAM cnt 15 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
+# Cycle    0 RAM cnt 0 [PASS] | Expected: -0.0000 + i -0.0000 | Got: -0.0000 + i -0.0000
+# Cycle    1 RAM cnt 1 [PASS] | Expected: -0.0000 + i -0.0000 | Got: -0.0000 + i -0.0000
+# Cycle    2 RAM cnt 2 [PASS] | Expected: -0.0000 + i -0.0000 | Got: -0.0000 + i -0.0000
+# Cycle    3 RAM cnt 3 [PASS] | Expected: -0.0000 + i -0.0000 | Got: -0.0000 + i -0.0000
+# Cycle    4 RAM cnt 4 [PASS] | Expected: -0.0000 + i -0.0000 | Got: -0.0000 + i -0.0000
+# Cycle    5 RAM cnt 5 [PASS] | Expected: -0.0000 + i -0.0000 | Got: -0.0000 + i -0.0000
+# Cycle    6 RAM cnt 6 [PASS] | Expected: -0.0000 + i -0.0000 | Got: -0.0000 + i -0.0000
+# Cycle    7 RAM cnt 7 [PASS] | Expected: -0.0000 + i -0.0000 | Got: -0.0000 + i -0.0000
+# Cycle    8 RAM cnt 8 [PASS] | Expected: -0.0000 + i -0.0000 | Got: -0.0000 + i -0.0000
+# Cycle    9 RAM cnt 9 [PASS] | Expected: -0.0000 + i -0.0000 | Got: -0.0000 + i -0.0000
+# Cycle   10 RAM cnt 10 [PASS] | Expected: -0.0000 + i -0.0000 | Got: -0.0000 + i -0.0000
+# Cycle   11 RAM cnt 11 [PASS] | Expected: -0.0000 + i -0.0000 | Got: -0.0000 + i -0.0000
+# Cycle   12 RAM cnt 12 [PASS] | Expected: -0.0000 + i -0.0000 | Got: -0.0000 + i -0.0000
+# Cycle   13 RAM cnt 13 [PASS] | Expected: -0.0000 + i -0.0000 | Got: -0.0000 + i -0.0000
+# Cycle   14 RAM cnt 14 [PASS] | Expected: -0.0000 + i -0.0000 | Got: -0.0000 + i -0.0000
+# Cycle   15 RAM cnt 15 [PASS] | Expected: -0.0000 + i -0.0000 | Got: -0.0000 + i -0.0000
 # Cycle   16 RAM cnt 16 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
 # Cycle   17 RAM cnt 17 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
 # Cycle   18 RAM cnt 18 [PASS] | Expected: 0.0000 + i 0.0000 | Got: 0.0000 + i 0.0000
@@ -1758,5 +1729,5 @@
 # Break in Module Wrapper_tb at Wrapper_tb.sv line 124
 # Stopped at Wrapper_tb.sv line 124
 # Saving coverage database on exit...
-# End time: 17:13:51 on Aug 13,2026, Elapsed time: 0:00:08
+# End time: 17:51:49 on Aug 13,2026, Elapsed time: 0:00:07
 # Errors: 0, Warnings: 0
