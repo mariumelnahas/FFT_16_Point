@@ -17,9 +17,9 @@ Branch Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_tw_counter
     ----         ----                      -----     ------ 
   File ../RTL/FFT_block/counter.sv
 ------------------------------------IF Branch------------------------------------
-    11                                      1635     Count coming in to IF
-    11              1                          1     
-    13              1                       1634     
+    22                                      1635     Count coming in to IF
+    22              1                          1     
+    24              1                       1634     
 Branch totals: 2 hits of 2 branches = 100.00%
 
 
@@ -35,9 +35,9 @@ Statement Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_tw_counter --
     Line         Item                      Count     Source 
     ----         ----                      -----     ------ 
   File ../RTL/FFT_block/counter.sv
-    10              1                       1635     
-    12              1                          1     
-    14              1                       1634     
+    21              1                       1635     
+    23              1                          1     
+    25              1                       1634     
 
 =================================================================================
 === Instance: /\Wrapper_tb /DUT/FFT_block/u_botmux_1
@@ -175,16 +175,16 @@ Branch Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_mult_1
     ----         ----                      -----     ------ 
   File ../RTL/FFT_block/comp_mult.sv
 ------------------------------------CASE Branch------------------------------------
-    53                                      1633     Count coming in to CASE
-    54              1                        103     
-    55              1                        102     
-    56              1                        102     
-    57              1                        102     
-    58              1                        102     
-    59              1                        102     
-    60              1                        102     
-    61              1                        102     
-    62              1                        816     
+    66                                      1633     Count coming in to CASE
+    67              1                        103     
+    68              1                        102     
+    69              1                        102     
+    70              1                        102     
+    71              1                        102     
+    72              1                        102     
+    73              1                        102     
+    74              1                        102     
+    75              1                        816     
 Branch totals: 9 hits of 9 branches = 100.00%
 
 
@@ -200,30 +200,30 @@ Statement Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_mult_1 --
     Line         Item                      Count     Source 
     ----         ----                      -----     ------ 
   File ../RTL/FFT_block/comp_mult.sv
-    50              1                       1633     
-    54              1                        103     
-    54              2                        103     
-    55              1                        102     
-    55              2                        102     
-    56              1                        102     
-    56              2                        102     
-    57              1                        102     
-    57              2                        102     
-    58              1                        102     
-    58              2                        102     
-    59              1                        102     
-    59              2                        102     
-    60              1                        102     
-    60              2                        102     
-    61              1                        102     
-    61              2                        102     
-    62              1                        816     
-    62              2                        816     
-    118             1                      13680     
-    119             1                      13680     
-    122             1                      13680     
-    157             1                       3420     
-    158             1                       3420     
+    63              1                       1633     
+    67              1                        103     
+    67              2                        103     
+    68              1                        102     
+    68              2                        102     
+    69              1                        102     
+    69              2                        102     
+    70              1                        102     
+    70              2                        102     
+    71              1                        102     
+    71              2                        102     
+    72              1                        102     
+    72              2                        102     
+    73              1                        102     
+    73              2                        102     
+    74              1                        102     
+    74              2                        102     
+    75              1                        816     
+    75              2                        816     
+    124             1                      13680     
+    125             1                      13680     
+    126             1                      13680     
+    141             1                       3420     
+    142             1                       3420     
 
 =================================================================================
 === Instance: /\Wrapper_tb /DUT/FFT_block/u_topmux_2
@@ -324,12 +324,12 @@ Branch Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_mult_2
     ----         ----                      -----     ------ 
   File ../RTL/FFT_block/comp_mult.sv
 ------------------------------------CASE Branch------------------------------------
-    66                                      1633     Count coming in to CASE
-    67              1                        205     
-    68              1                        204     
-    69              1                        204     
-    70              1                        204     
-    71              1                        816     
+    79                                      1633     Count coming in to CASE
+    80              1                        205     
+    81              1                        204     
+    82              1                        204     
+    83              1                        204     
+    84              1                        816     
 Branch totals: 5 hits of 5 branches = 100.00%
 
 
@@ -345,22 +345,22 @@ Statement Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_mult_2 --
     Line         Item                      Count     Source 
     ----         ----                      -----     ------ 
   File ../RTL/FFT_block/comp_mult.sv
-    50              1                       1633     
-    67              1                        205     
-    67              2                        205     
-    68              1                        204     
-    68              2                        204     
-    69              1                        204     
-    69              2                        204     
-    70              1                        204     
-    70              2                        204     
-    71              1                        816     
-    71              2                        816     
-    118             1                      17684     
-    119             1                      17684     
-    122             1                      17684     
-    157             1                       4421     
-    158             1                       4421     
+    63              1                       1633     
+    80              1                        205     
+    80              2                        205     
+    81              1                        204     
+    81              2                        204     
+    82              1                        204     
+    82              2                        204     
+    83              1                        204     
+    83              2                        204     
+    84              1                        816     
+    84              2                        816     
+    124             1                      17684     
+    125             1                      17684     
+    126             1                      17684     
+    141             1                       4421     
+    142             1                       4421     
 
 =================================================================================
 === Instance: /\Wrapper_tb /DUT/FFT_block/u_botmux_3
@@ -498,10 +498,10 @@ Branch Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_mult_3
     ----         ----                      -----     ------ 
   File ../RTL/FFT_block/comp_mult.sv
 ------------------------------------CASE Branch------------------------------------
-    75                                      1633     Count coming in to CASE
-    76              1                        409     
-    77              1                        408     
-    78              1                        816     
+    88                                      1633     Count coming in to CASE
+    89              1                        409     
+    90              1                        408     
+    91              1                        816     
 Branch totals: 3 hits of 3 branches = 100.00%
 
 
@@ -517,18 +517,18 @@ Statement Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_mult_3 --
     Line         Item                      Count     Source 
     ----         ----                      -----     ------ 
   File ../RTL/FFT_block/comp_mult.sv
-    50              1                       1633     
-    76              1                        409     
-    76              2                        409     
-    77              1                        408     
-    77              2                        408     
-    78              1                        816     
-    78              2                        816     
-    118             1                      20892     
-    119             1                      20892     
-    122             1                      20892     
-    157             1                       5223     
-    158             1                       5223     
+    63              1                       1633     
+    89              1                        409     
+    89              2                        409     
+    90              1                        408     
+    90              2                        408     
+    91              1                        816     
+    91              2                        816     
+    124             1                      20892     
+    125             1                      20892     
+    126             1                      20892     
+    141             1                       5223     
+    142             1                       5223     
 
 =================================================================================
 === Instance: /\Wrapper_tb /DUT/FFT_block/u_sr_4
