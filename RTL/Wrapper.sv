@@ -11,7 +11,7 @@ wire [2*WIDTH-1:0] reg_out;
 
 wire gclk = clk & BS;
 
-fft_16pt_top #(
+FFT_wrapper #(
     .WIDTH(WIDTH)
 ) FFT_block
 (

@@ -30,7 +30,14 @@ module FFT_wrapper #(
     // Generate twiddle factor select counter
     // Runs on inverted clock for proper synchronization
     wire [3:0] tw_count;
-    counter_4 u_tw_counter (.clk(~clk), .rst(sys_rst), .en(1'b1), .count(tw_count));
+       counter #(
+        .LENGTH(4)
+    ) u_tw_counter (
+        .clk  (~clk),
+        .rst  (sys_rst),
+        .en   (1'b1),
+        .count(tw_count)
+    );
 
     // Derive stage-specific mux select signals from counter bits
     // Each stage uses different counter bits for timing alignment

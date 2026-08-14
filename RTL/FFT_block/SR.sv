@@ -20,7 +20,7 @@ module shift_register #(
 );
     localparam DEPTH = (STAGE == 1) ? 8 : (STAGE == 2) ? 4 : (STAGE == 3) ? 2 : 1;
 
-    reg [31:0] sr [0:DEPTH-1] = '{default: 32'd0};
+    reg [31:0] sr [0:DEPTH-1];
     integer i;
     
     always @(posedge clk or posedge reset) begin
