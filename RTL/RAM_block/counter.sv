@@ -1,3 +1,16 @@
+// =====================================================================
+// Counter Module
+// =====================================================================
+// Description:
+//   Generates a programmable-length counter with asynchronous reset
+//   and enable control. Provides both multiplexer select signals for
+//   FFT pipeline stages and address/RAM selection for output memory.
+//   Within the FFT block, functionally equivalent to cascaded clock
+//   dividers with outputs tapped after each division stage.
+//   The MSB output controls RAM role switching.
+//
+// Authors: Marium Waleed, Yossef Medhat
+// =====================================================================
 module counter #(
     parameter LENGTH = 4
 )(

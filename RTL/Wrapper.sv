@@ -1,3 +1,5 @@
+//This module connects the FFT block to the RAM block with an intermediate register for one clock cycle delay
+//The clock of the FFT system is gated with the BS signal so that the system stops when there is samples in or out
 module Wrapper #(parameter int WIDTH = 16) (
     input  wire        clk,   // Clock
     input  wire        BS,   // Block Select

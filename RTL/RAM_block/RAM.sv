@@ -1,3 +1,16 @@
+// =====================================================================
+// RAM Module
+// =====================================================================
+// Description:
+//   Single-port RAM for buffering FFT output samples. Required because
+//   bit-reversed address generation necessitates availability of all
+//   16 output samples before reading. Operates in 16-cycle write phase
+//   followed by 16-cycle read phase. Instantiated twice in RAM wrapper
+//   configuration for continuous data flow.
+//
+// Authors: Marium Waleed, Yossef Medhat
+// =====================================================================
+
 module RAM (
     input  wire        clk,   // Clock
     input  wire        we,    // Write enable (1 = Write, 0 = Read)
@@ -12,7 +25,6 @@ module RAM (
 
     assign dout = (rst) ? 32'h0 : (~we) ? mem[addr] : 32'bz; // Tri-state output for read operation
 
-    // Asynchronous Active-High Reset Logic
     always @(posedge clk) begin
             if (we) mem[addr] <= din;   // Synchronous write operation
 

@@ -1,6 +1,16 @@
+// =====================================================================
+// Bit Reversal Module
+// =====================================================================
+// Description:
+//   Takes a 4-bit address and performs bit reversal by rearranging
+//   the bit order to output the address with reversed bits.
+//
+// Authors: Marium Waleed, Yossef Medhat
+// =====================================================================
+
 module bit_reversal (
-    input  wire [3:0] in,   // e.g., 4'b1011
-    output wire [3:0] out   // e.g., 4'b1101
+    input  wire [3:0] in,   
+    output wire [3:0] out   
 );
 
     assign out = {in[0], in[1], in[2], in[3]};
