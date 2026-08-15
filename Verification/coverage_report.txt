@@ -1,191 +1,888 @@
-Coverage Report Summary Data by instance
+Coverage Report by instance with details
 
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/FFT_block/u_tw_counter
-=== Design Unit: work.counter_4
+=== Instance: /\Wrapper_tb /DUT/FFT_block/u_tw_counter
+=== Design Unit: work.counter
 =================================================================================
+Branch Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Branches                         2         2         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_tw_counter
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/RAM_block/counter.sv
+------------------------------------IF Branch------------------------------------
+    11                                      1635     Count coming in to IF
+    11              1                          1     
+    13              1                       1634     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Statements                       3         3         0   100.00%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_tw_counter --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/RAM_block/counter.sv
+    10              1                       1635     
+    12              1                          1     
+    14              1                       1634     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/FFT_block/u_botmux_1
+=== Instance: /\Wrapper_tb /DUT/FFT_block/u_botmux_1
 === Design Unit: work.mux_2_1_32bit
 =================================================================================
+Branch Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Branches                         2         2         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_botmux_1
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/mux_2_1_32bit.sv
+------------------------------------IF Branch------------------------------------
+    19                                      4836     Count coming in to IF
+    19              1                       2420     
+    19              2                       2416     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Statements                       1         1         0   100.00%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_botmux_1 --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/mux_2_1_32bit.sv
+    19              1                       4838     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/FFT_block/u_topmux_1
+=== Instance: /\Wrapper_tb /DUT/FFT_block/u_topmux_1
 === Design Unit: work.mux_2_1_32bit
 =================================================================================
+Branch Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Branches                         2         2         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_topmux_1
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/mux_2_1_32bit.sv
+------------------------------------IF Branch------------------------------------
+    19                                      4836     Count coming in to IF
+    19              1                       2416     
+    19              2                       2420     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Statements                       1         1         0   100.00%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_topmux_1 --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/mux_2_1_32bit.sv
+    19              1                       4838     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/FFT_block/u_sr_1
+=== Instance: /\Wrapper_tb /DUT/FFT_block/u_sr_1
 === Design Unit: work.shift_register
 =================================================================================
+Branch Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Branches                         2         2         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_sr_1
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/SR.sv
+------------------------------------IF Branch------------------------------------
+    27                                      1611     Count coming in to IF
+    27              1                          1     
+    31              1                       1610     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Statements                       9         9         0   100.00%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_sr_1 --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/SR.sv
+    26              1                       1611     
+    28              1                          1     
+    28              2                          8     
+    29              1                          8     
+    32              1                       1610     
+    33              1                       1610     
+    33              2                      11270     
+    34              1                      11270     
+    39              1                       1610     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/FFT_block/u_mult_1
+=== Instance: /\Wrapper_tb /DUT/FFT_block/u_mult_1
 === Design Unit: work.complex_multiplier
 =================================================================================
+Branch Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Branches                         9         9         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_mult_1
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/comp_mult.sv
+------------------------------------CASE Branch------------------------------------
+    66                                      1633     Count coming in to CASE
+    67              1                        103     
+    68              1                        102     
+    69              1                        102     
+    70              1                        102     
+    71              1                        102     
+    72              1                        102     
+    73              1                        102     
+    74              1                        102     
+    75              1                        816     
+Branch totals: 9 hits of 9 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Statements                      24        24         0   100.00%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_mult_1 --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/comp_mult.sv
+    63              1                       1633     
+    67              1                        103     
+    67              2                        103     
+    68              1                        102     
+    68              2                        102     
+    69              1                        102     
+    69              2                        102     
+    70              1                        102     
+    70              2                        102     
+    71              1                        102     
+    71              2                        102     
+    72              1                        102     
+    72              2                        102     
+    73              1                        102     
+    73              2                        102     
+    74              1                        102     
+    74              2                        102     
+    75              1                        816     
+    75              2                        816     
+    124             1                      13680     
+    125             1                      13680     
+    126             1                      13680     
+    141             1                       3420     
+    142             1                       3420     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/FFT_block/u_topmux_2
+=== Instance: /\Wrapper_tb /DUT/FFT_block/u_topmux_2
 === Design Unit: work.mux_2_1_32bit
 =================================================================================
+Branch Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Branches                         2         2         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_topmux_2
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/mux_2_1_32bit.sv
+------------------------------------IF Branch------------------------------------
+    19                                      6637     Count coming in to IF
+    19              1                       3217     
+    19              2                       3420     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Statements                       1         1         0   100.00%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_topmux_2 --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/mux_2_1_32bit.sv
+    19              1                       6638     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/FFT_block/u_sr_2
+=== Instance: /\Wrapper_tb /DUT/FFT_block/u_sr_2
 === Design Unit: work.shift_register
 =================================================================================
+Branch Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Branches                         2         2         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_sr_2
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/SR.sv
+------------------------------------IF Branch------------------------------------
+    27                                      1608     Count coming in to IF
+    27              1                          1     
+    31              1                       1607     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Statements                       9         9         0   100.00%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_sr_2 --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/SR.sv
+    26              1                       1608     
+    28              1                          1     
+    28              2                          4     
+    29              1                          4     
+    32              1                       1607     
+    33              1                       1607     
+    33              2                       4821     
+    34              1                       4821     
+    39              1                       1606     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/FFT_block/u_mult_2
+=== Instance: /\Wrapper_tb /DUT/FFT_block/u_mult_2
 === Design Unit: work.complex_multiplier
 =================================================================================
+Branch Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Branches                         5         5         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_mult_2
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/comp_mult.sv
+------------------------------------CASE Branch------------------------------------
+    79                                      1633     Count coming in to CASE
+    80              1                        205     
+    81              1                        204     
+    82              1                        204     
+    83              1                        204     
+    84              1                        816     
+Branch totals: 5 hits of 5 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Statements                      16        16         0   100.00%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_mult_2 --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/comp_mult.sv
+    63              1                       1633     
+    80              1                        205     
+    80              2                        205     
+    81              1                        204     
+    81              2                        204     
+    82              1                        204     
+    82              2                        204     
+    83              1                        204     
+    83              2                        204     
+    84              1                        816     
+    84              2                        816     
+    124             1                      17684     
+    125             1                      17684     
+    126             1                      17684     
+    141             1                       4421     
+    142             1                       4421     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/FFT_block/u_botmux_3
+=== Instance: /\Wrapper_tb /DUT/FFT_block/u_botmux_3
 === Design Unit: work.mux_2_1_32bit
 =================================================================================
+Branch Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Branches                         2         2         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_botmux_3
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/mux_2_1_32bit.sv
+------------------------------------IF Branch------------------------------------
+    19                                      7638     Count coming in to IF
+    19              1                       4020     
+    19              2                       3618     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Statements                       1         1         0   100.00%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_botmux_3 --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/mux_2_1_32bit.sv
+    19              1                       7639     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/FFT_block/u_topmux_3
+=== Instance: /\Wrapper_tb /DUT/FFT_block/u_topmux_3
 === Design Unit: work.mux_2_1_32bit
 =================================================================================
+Branch Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Branches                         2         2         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_topmux_3
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/mux_2_1_32bit.sv
+------------------------------------IF Branch------------------------------------
+    19                                      7638     Count coming in to IF
+    19              1                       3618     
+    19              2                       4020     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Statements                       1         1         0   100.00%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_topmux_3 --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/mux_2_1_32bit.sv
+    19              1                       7639     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/FFT_block/u_sr_3
+=== Instance: /\Wrapper_tb /DUT/FFT_block/u_sr_3
 === Design Unit: work.shift_register
 =================================================================================
+Branch Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Branches                         2         2         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_sr_3
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/SR.sv
+------------------------------------IF Branch------------------------------------
+    27                                      1607     Count coming in to IF
+    27              1                          1     
+    31              1                       1606     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Statements                       9         9         0   100.00%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_sr_3 --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/SR.sv
+    26              1                       1607     
+    28              1                          1     
+    28              2                          2     
+    29              1                          2     
+    32              1                       1606     
+    33              1                       1606     
+    33              2                       1606     
+    34              1                       1606     
+    39              1                       1604     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/FFT_block/u_mult_3
+=== Instance: /\Wrapper_tb /DUT/FFT_block/u_mult_3
 === Design Unit: work.complex_multiplier
 =================================================================================
+Branch Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Branches                         3         3         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_mult_3
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/comp_mult.sv
+------------------------------------CASE Branch------------------------------------
+    88                                      1633     Count coming in to CASE
+    89              1                        409     
+    90              1                        408     
+    91              1                        816     
+Branch totals: 3 hits of 3 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Statements                      12        12         0   100.00%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_mult_3 --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/comp_mult.sv
+    63              1                       1633     
+    89              1                        409     
+    89              2                        409     
+    90              1                        408     
+    90              2                        408     
+    91              1                        816     
+    91              2                        816     
+    124             1                      20892     
+    125             1                      20892     
+    126             1                      20892     
+    141             1                       5223     
+    142             1                       5223     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/FFT_block/u_sr_4
+=== Instance: /\Wrapper_tb /DUT/FFT_block/u_sr_4
 === Design Unit: work.shift_register
 =================================================================================
+Branch Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Branches                         2         2         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_sr_4
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/SR.sv
+------------------------------------IF Branch------------------------------------
+    27                                      1607     Count coming in to IF
+    27              1                          1     
+    31              1                       1606     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Statements                       9         7         2    77.77%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/FFT_block/u_sr_4 --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/SR.sv
+    26              1                       1607     
+    28              1                          1     
+    28              2                          1     
+    29              1                          1     
+    32              1                       1606     
+    33              1                       1606     
+    33              2                    ***0***     
+    34              1                    ***0***     
+    39              1                       1603     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/FFT_block
-=== Design Unit: work.fft_16pt_top
+=== Instance: /\Wrapper_tb /DUT/FFT_block
+=== Design Unit: work.FFT_wrapper
 =================================================================================
+Statement Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Statements                       2         2         0   100.00%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/FFT_block --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/FFT_block/FFT_wrapper.sv
+    65              1                      11686     
+    66              1                      11686     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/register_block
+=== Instance: /\Wrapper_tb /DUT/register_block
 === Design Unit: work.register
 =================================================================================
+Branch Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Branches                         2         2         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Wrapper_tb /DUT/register_block
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/Register.sv
+------------------------------------IF Branch------------------------------------
+    13                                      1607     Count coming in to IF
+    13              1                          1     
+    15              1                       1606     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Statements                       3         3         0   100.00%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/register_block --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/Register.sv
+    12              1                       1607     
+    14              1                          1     
+    16              1                       1606     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/RAM_block/u_counter
+=== Instance: /\Wrapper_tb /DUT/RAM_block/u_counter
 === Design Unit: work.counter
 =================================================================================
+Branch Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Branches                         2         2         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Wrapper_tb /DUT/RAM_block/u_counter
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/RAM_block/counter.sv
+------------------------------------IF Branch------------------------------------
+    11                                      1635     Count coming in to IF
+    11              1                          1     
+    13              1                       1634     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Statements                       3         3         0   100.00%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/RAM_block/u_counter --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/RAM_block/counter.sv
+    10              1                       1635     
+    12              1                          1     
+    14              1                       1634     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/RAM_block/u_reverser
+=== Instance: /\Wrapper_tb /DUT/RAM_block/u_reverser
 === Design Unit: work.bit_reversal
 =================================================================================
+Statement Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Statements                       1         1         0   100.00%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/RAM_block/u_reverser --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/RAM_block/bit_reversal.sv
+    6               1                       1634     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/RAM_block/u_ram0
+=== Instance: /\Wrapper_tb /DUT/RAM_block/u_ram0
 === Design Unit: work.RAM
 =================================================================================
+Branch Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Branches                         6         6         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Wrapper_tb /DUT/RAM_block/u_ram0
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/RAM_block/RAM.sv
+------------------------------------IF Branch------------------------------------
+    13                                      2451     Count coming in to IF
+    13              1                          2     
+    13              2                       2449     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    13                                      2449     Count coming in to IF
+    13              3                        816     
+    13              4                       1633     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    17                                      1633     Count coming in to IF
+    17              1                        816     
+                                             817     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Statements                       3         3         0   100.00%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/RAM_block/u_ram0 --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/RAM_block/RAM.sv
+    13              1                       2452     
+    16              1                       1633     
+    17              1                        816     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/RAM_block/u_ram1
+=== Instance: /\Wrapper_tb /DUT/RAM_block/u_ram1
 === Design Unit: work.RAM
 =================================================================================
+Branch Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Branches                         6         6         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /\Wrapper_tb /DUT/RAM_block/u_ram1
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/RAM_block/RAM.sv
+------------------------------------IF Branch------------------------------------
+    13                                      2451     Count coming in to IF
+    13              1                          2     
+    13              2                       2449     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    13                                      2449     Count coming in to IF
+    13              3                        817     
+    13              4                       1632     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    17                                      1633     Count coming in to IF
+    17              1                        816     
+                                             817     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Statements                       3         3         0   100.00%
 
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/RAM_block/u_ram1 --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/RAM_block/RAM.sv
+    13              1                       2452     
+    16              1                       1633     
+    17              1                        816     
+
 =================================================================================
-=== Instance: /Wrapper_tb/DUT/RAM_block
+=== Instance: /\Wrapper_tb /DUT/RAM_block
 === Design Unit: work.ram_wrapper
 =================================================================================
+Branch Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
     Branches                         8         8         0   100.00%
-    Statements                       5         5         0   100.00%
 
-=================================================================================
-=== Instance: /Wrapper_tb/DUT
-=== Design Unit: work.Wrapper
-=================================================================================
+================================Branch Details================================
+
+Branch Coverage for instance /\Wrapper_tb /DUT/RAM_block
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/RAM_block/RAM_wrapper.sv
+------------------------------------IF Branch------------------------------------
+    54                                      1633     Count coming in to IF
+    54              1                        817     
+    54              2                        816     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    55                                      1633     Count coming in to IF
+    55              1                        816     
+    55              2                        817     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    60                                      1634     Count coming in to IF
+    60              1                          1     
+    62              1                       1633     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    63                                      1632     Count coming in to IF
+    63              1                        816     
+    63              2                        816     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+Statement Coverage:
     Enabled Coverage              Bins      Hits    Misses  Coverage
     ----------------              ----      ----    ------  --------
+    Statements                       5         5         0   100.00%
+
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT/RAM_block --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/RAM_block/RAM_wrapper.sv
+    54              1                       1634     
+    55              1                       1634     
+    59              1                       1634     
+    61              1                          1     
+    63              1                       1633     
+
+=================================================================================
+=== Instance: /\Wrapper_tb /DUT
+=== Design Unit: work.Wrapper
+=================================================================================
+Expression Coverage:
+    Enabled Coverage              Bins   Covered    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Expressions                      2         2         0   100.00%
+
+================================Expression Details================================
+
+Expression Coverage for instance /\Wrapper_tb /DUT --
+
+  File ../RTL/Wrapper.sv
+----------------Focused Expression View-----------------
+Line       12 Item    1  (clk & BS)
+Expression totals: 2 of 2 input terms covered = 100.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
     Statements                       1         1         0   100.00%
+
+================================Statement Details================================
+
+Statement Coverage for instance /\Wrapper_tb /DUT --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File ../RTL/Wrapper.sv
+    12              1                       3276     
 
 
 Total Coverage By Instance (filtered view): 99.43%

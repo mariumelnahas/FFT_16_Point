@@ -1,6 +1,5 @@
 ../RTL/FFT_block/Butterfly.sv
 ../RTL/FFT_block/comp_mult.sv
-../RTL/FFT_block/counter.sv
 ../RTL/FFT_block/FFT_wrapper.sv
 ../RTL/FFT_block/fxpt_addsub.sv
 ../RTL/FFT_block/mux_2_1_32bit.sv
