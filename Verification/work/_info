@@ -20,6 +20,7 @@ R0
 R0
 R0
 R0
+R0
 !s11f vlog 2021.1 2021.01, Jan 19 2021
 13
 !s112 1.1
@@ -41,28 +42,28 @@ Z4 OL;O;2021.1;73
 R1
 vbit_reversal
 Z5 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z6 !s110 1786778403
+Z6 !s110 1786802014
 !i10b 1
-!s100 m0cOP@lGaS_=^De>l];@F1
-IPQ:hV>i^Tf<MC]<Oh01B^3
+!s100 KH4o;YTbBbZO1VJ`HQ?;V3
+IBi]D7ffUgEP5I?JLID4Hb3
 S1
 R1
-Z7 w1786775881
+w1786779631
 8../RTL/RAM_block/bit_reversal.sv
 F../RTL/RAM_block/bit_reversal.sv
-!i122 35
-L0 1 8
-Z8 VDg1SIo80bB@j0V0VzS_@n1
-Z9 OL;L;2021.1;73
+!i122 37
+L0 11 8
+Z7 VDg1SIo80bB@j0V0VzS_@n1
+Z8 OL;L;2021.1;73
 r1
 !s85 0
 31
-Z10 !s108 1786778403.000000
-Z11 !s107 ../RTL/Wrapper.sv|../RTL/Register.sv|../RTL/RAM_block/RAM.sv|../RTL/RAM_block/RAM_wrapper.sv|../RTL/RAM_block/counter.sv|../RTL/RAM_block/bit_reversal.sv|../RTL/FFT_block/SR.sv|../RTL/FFT_block/mux_2_1_32bit.sv|../RTL/FFT_block/fxpt_addsub.sv|../RTL/FFT_block/FFT_wrapper.sv|../RTL/FFT_block/comp_mult.sv|../RTL/FFT_block/Butterfly.sv|
-Z12 !s90 -sv|-cover|bcesf|-f|rtl_flist.f|
+Z9 !s108 1786802014.000000
+Z10 !s107 ../RTL/Wrapper.sv|../RTL/Register.sv|../RTL/RAM_block/RAM.sv|../RTL/RAM_block/RAM_wrapper.sv|../RTL/RAM_block/counter.sv|../RTL/RAM_block/bit_reversal.sv|../RTL/FFT_block/SR.sv|../RTL/FFT_block/mux_2_1_32bit.sv|../RTL/FFT_block/fxpt_addsub.sv|../RTL/FFT_block/FFT_wrapper.sv|../RTL/FFT_block/comp_mult.sv|../RTL/FFT_block/Butterfly.sv|
+Z11 !s90 -sv|-cover|bcesf|-f|rtl_flist.f|
 !i113 0
-Z13 !s102 -cover bcesf
-Z14 o-sv -cover bcesf -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z12 !s102 -cover bcesf
+Z13 o-sv -cover bcesf -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R3
 vbutterfly
 R5
@@ -75,23 +76,23 @@ R1
 w1786624253
 8../RTL/FFT_block/Butterfly.sv
 F../RTL/FFT_block/Butterfly.sv
-!i122 35
+!i122 37
 L0 14 69
+R7
 R8
-R9
 r1
 !s85 0
 31
+R9
 R10
 R11
-R12
 !i113 0
+R12
 R13
-R14
 R3
 vButterfly_tb
 R5
-R6
+Z14 !s110 1786802015
 !i10b 1
 !s100 X53T[SFKj3:XDD]2=oOMW3
 IEjP^RVVbL;R79baT4^6FO1
@@ -100,23 +101,23 @@ R1
 w1786181475
 8Butterfly_tb.sv
 FButterfly_tb.sv
-!i122 36
+!i122 38
 L0 12 116
+R7
 R8
-R9
 r1
 !s85 0
 31
-R10
-Z15 !s107 fxpt_addsub_tb.sv|compare_files.sv|Wrapper_tb.sv|FFT_wrapper_tb.sv|Butterfly_tb.sv|
-Z16 !s90 -sv|-f|tb_flist.f|
+Z15 !s108 1786802015.000000
+Z16 !s107 fxpt_addsub_tb.sv|compare_files.sv|Wrapper_tb.sv|FFT_wrapper_tb.sv|Butterfly_tb.sv|
+Z17 !s90 -sv|-f|tb_flist.f|
 !i113 0
-Z17 o-sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z18 o-sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R3
 n@butterfly_tb
 vcompare_files
 R5
-R6
+R14
 !i10b 1
 !s100 Q9]CRYc4S>O8TIjAUA8@22
 I1E9V5MFG5cR3JS5Nz49dJ0
@@ -125,18 +126,18 @@ R1
 w1786606053
 8compare_files.sv
 Fcompare_files.sv
-!i122 36
+!i122 38
 L0 1 55
+R7
 R8
-R9
 r1
 !s85 0
 31
-R10
 R15
 R16
-!i113 0
 R17
+!i113 0
+R18
 R3
 vcomplex_multiplier
 R5
@@ -146,47 +147,47 @@ R6
 I<3A1[Q?<IDeUCWoMn0EfQ2
 S1
 R1
-R7
+Z19 w1786775881
 8../RTL/FFT_block/comp_mult.sv
 F../RTL/FFT_block/comp_mult.sv
-!i122 35
+!i122 37
 L0 16 129
+R7
 R8
-R9
 r1
 !s85 0
 31
+R9
 R10
 R11
-R12
 !i113 0
+R12
 R13
-R14
 R3
 vcounter
 R5
 R6
 !i10b 1
-!s100 7kE<Ri_V[?[DkWQ;@N3mK0
-I>OHzFObU>10MN:B[iZ1`I1
+!s100 ^fO2]6jT^jMn<A:W?@6`@2
+I7Me[7C=<>EfE<zTll?bKT1
 S1
 R1
-R7
+w1786780208
 8../RTL/RAM_block/counter.sv
 F../RTL/RAM_block/counter.sv
-!i122 35
-L0 1 17
+!i122 37
+L0 14 17
+R7
 R8
-R9
 r1
 !s85 0
 31
+R9
 R10
 R11
-R12
 !i113 0
+R12
 R13
-R14
 R3
 vcounter_4
 R5
@@ -201,17 +202,17 @@ w1786629819
 F../RTL/FFT_block/counter.sv
 !i122 32
 L0 12 17
+R7
 R8
-R9
 r1
 !s85 0
 31
 !s108 1786632701.000000
-Z18 !s107 ../RTL/Wrapper.sv|../RTL/Register.sv|../RTL/RAM_block/RAM.sv|../RTL/RAM_block/RAM_wrapper.sv|../RTL/RAM_block/counter.sv|../RTL/RAM_block/bit_reversal.sv|../RTL/FFT_block/SR.sv|../RTL/FFT_block/mux_2_1_32bit.sv|../RTL/FFT_block/fxpt_addsub.sv|../RTL/FFT_block/FFT_wrapper.sv|../RTL/FFT_block/counter.sv|../RTL/FFT_block/comp_mult.sv|../RTL/FFT_block/Butterfly.sv|
-R12
+Z20 !s107 ../RTL/Wrapper.sv|../RTL/Register.sv|../RTL/RAM_block/RAM.sv|../RTL/RAM_block/RAM_wrapper.sv|../RTL/RAM_block/counter.sv|../RTL/RAM_block/bit_reversal.sv|../RTL/FFT_block/SR.sv|../RTL/FFT_block/mux_2_1_32bit.sv|../RTL/FFT_block/fxpt_addsub.sv|../RTL/FFT_block/FFT_wrapper.sv|../RTL/FFT_block/counter.sv|../RTL/FFT_block/comp_mult.sv|../RTL/FFT_block/Butterfly.sv|
+R11
 !i113 0
+R12
 R13
-R14
 R3
 vfft_16pt_top
 R5
@@ -222,21 +223,21 @@ IDCZ9HI?S5TiWEO[9<Rdj?0
 S1
 R1
 w1786616322
-Z19 8../RTL/FFT_block/FFT_wrapper.sv
-Z20 F../RTL/FFT_block/FFT_wrapper.sv
+Z21 8../RTL/FFT_block/FFT_wrapper.sv
+Z22 F../RTL/FFT_block/FFT_wrapper.sv
 !i122 14
 L0 3 144
+R7
 R8
-R9
 r1
 !s85 0
 31
 !s108 1786622350.000000
-R18
-R12
+R20
+R11
 !i113 0
+R12
 R13
-R14
 R3
 vFFT_wrapper
 R5
@@ -247,26 +248,26 @@ In4;SgBCIa0PZ`ez^^IC>N2
 S1
 R1
 w1786778388
-R19
-R20
-!i122 35
+R21
+R22
+!i122 37
 L0 17 159
+R7
 R8
-R9
 r1
 !s85 0
 31
+R9
 R10
 R11
-R12
 !i113 0
+R12
 R13
-R14
 R3
 n@f@f@t_wrapper
 vFFT_wrapper_tb
 R5
-R6
+R14
 !i10b 1
 !s100 W7ChN8U6WcY16d3h5S]5Z3
 I>SVL]YWLP3Baa5N^c:_PR1
@@ -275,18 +276,18 @@ R1
 w1786622755
 8FFT_wrapper_tb.sv
 FFFT_wrapper_tb.sv
-!i122 36
+!i122 38
 L0 3 129
+R7
 R8
-R9
 r1
 !s85 0
 31
-R10
 R15
 R16
-!i113 0
 R17
+!i113 0
+R18
 R3
 n@f@f@t_wrapper_tb
 vfxpt_addsub
@@ -297,26 +298,26 @@ R6
 I>:EQiaNSOBjc=fT:o=oeA0
 S1
 R1
-R7
+R19
 8../RTL/FFT_block/fxpt_addsub.sv
 F../RTL/FFT_block/fxpt_addsub.sv
-!i122 35
+!i122 37
 L0 13 39
+R7
 R8
-R9
 r1
 !s85 0
 31
+R9
 R10
 R11
-R12
 !i113 0
+R12
 R13
-R14
 R3
 vfxpt_addsub_tb
 R5
-R6
+R14
 !i10b 1
 !s100 UdL]70UCE]TzW?MNNo^2F1
 IHllLa@2=lehEBl0MFA]9K2
@@ -325,18 +326,18 @@ R1
 w1786386053
 8fxpt_addsub_tb.sv
 Ffxpt_addsub_tb.sv
-!i122 36
+!i122 38
 L0 34 211
+R7
 R8
-R9
 r1
 !s85 0
 31
-R10
 R15
 R16
-!i113 0
 R17
+!i113 0
+R18
 R3
 vmux_2_1_32bit
 R5
@@ -346,98 +347,98 @@ R6
 IB_e9Q;;OG1m6fdM9=2hB:3
 S1
 R1
-R7
+R19
 8../RTL/FFT_block/mux_2_1_32bit.sv
 F../RTL/FFT_block/mux_2_1_32bit.sv
-!i122 35
+!i122 37
 L0 12 10
+R7
 R8
-R9
 r1
 !s85 0
 31
+R9
 R10
 R11
-R12
 !i113 0
+R12
 R13
-R14
 R3
 vRAM
 R5
-R6
+R14
 !i10b 1
-!s100 <b?3B0b9;<c;M>7XGF_>@1
-IjmP@=@Rkdzho[hF0XEMAP2
+!s100 MXHmDP0;6>dB_6BPb_T;A3
+I`Z[XeU^Cl6c@kh[F2AD3R0
 S1
 R1
-R7
+w1786784154
 8../RTL/RAM_block/RAM.sv
 F../RTL/RAM_block/RAM.sv
-!i122 35
-L0 1 21
+!i122 37
+L0 14 20
+R7
 R8
-R9
 r1
 !s85 0
 31
+R9
 R10
 R11
-R12
 !i113 0
+R12
 R13
-R14
 R3
 n@r@a@m
 vram_wrapper
 R5
 R6
 !i10b 1
-!s100 41=k]:k2AU5QkSLl]bFAo2
-I:@UdV1HWl30aU[[e]Vn0c3
+!s100 X?@?S@Rl::iKOc3OoTKbR1
+IRN[_d5B2Zb<PSiJ^mQGe02
 S1
 R1
-R7
+w1786787239
 8../RTL/RAM_block/RAM_wrapper.sv
 F../RTL/RAM_block/RAM_wrapper.sv
-!i122 35
-L0 1 89
+!i122 37
+L0 14 76
+R7
 R8
-R9
 r1
 !s85 0
 31
+R9
 R10
 R11
-R12
 !i113 0
+R12
 R13
-R14
 R3
 vregister
 R5
-R6
+R14
 !i10b 1
-!s100 E<R57agPe`Bbdm39MR9YK1
-IXYa1Fm?@<GdgZOAQFj>321
+!s100 ]JJGP>17i_jmigD0=J<n13
+I<9zYlhXB_6J12V2kNQi[?2
 S1
 R1
-R7
+w1786784609
 8../RTL/Register.sv
 F../RTL/Register.sv
-!i122 35
-L0 1 20
+!i122 37
+L0 13 20
+R7
 R8
-R9
 r1
 !s85 0
 31
+R9
 R10
 R11
-R12
 !i113 0
+R12
 R13
-R14
 R3
 vshift_register
 R5
@@ -447,22 +448,22 @@ R6
 I0a1:k_]f3@W=e8:mdV>=V3
 S1
 R1
-R7
+R19
 8../RTL/FFT_block/SR.sv
 F../RTL/FFT_block/SR.sv
-!i122 35
+!i122 37
 L0 13 29
+R7
 R8
-R9
 r1
 !s85 0
 31
+R9
 R10
 R11
-R12
 !i113 0
+R12
 R13
-R14
 R3
 vtb_fft_16pt_top
 R5
@@ -477,46 +478,46 @@ w1786622123
 Ftb_fft_16pt_top.sv
 !i122 13
 L0 3 130
+R7
 R8
-R9
 r1
 !s85 0
 31
 !s108 1786622216.000000
 !s107 fxpt_addsub_tb.sv|compare_files.sv|Wrapper_tb.sv|tb_fft_16pt_top.sv|Butterfly_tb.sv|
-R16
-!i113 0
 R17
+!i113 0
+R18
 R3
 vWrapper
 R5
-R6
+R14
 !i10b 1
-!s100 9czzTL?GB=hZN[D:G>D:23
-IP_XAEdK5GMD:NHzh13:HH1
+!s100 EokYz`n2@1<U[4[Jz>A7>2
+IJ53]5MlWh=8BdaU]>Q=j52
 S1
 R1
-R7
+w1786787084
 8../RTL/Wrapper.sv
 F../RTL/Wrapper.sv
-!i122 35
-L0 1 42
+!i122 37
+L0 3 42
+R7
 R8
-R9
 r1
 !s85 0
 31
+R9
 R10
 R11
-R12
 !i113 0
+R12
 R13
-R14
 R3
 n@wrapper
 vWrapper_tb
 R5
-R6
+R14
 !i10b 1
 !s100 UV^>bh`Lj[df<=B=?eYNA3
 Ii@RNHAXkSMlKY_:5S[H7<0
@@ -525,23 +526,23 @@ R1
 w1786775866
 8Wrapper_tb.sv
 FWrapper_tb.sv
-!i122 36
+!i122 38
 L0 3 125
+R7
 R8
-R9
 r1
 !s85 0
 31
-R10
 R15
 R16
-!i113 0
 R17
+!i113 0
+R18
 R3
 n@wrapper_tb
 TWrapper_tb_opt
-R6
-V3KDTHW3eXb<JzG:hfz5120
+!s110 1786802016
+V`oTXR0`QH0Ao9zM5S;fgP2
 04 10 4 work Wrapper_tb fast 0
 !s102 +cover=bcesf
 R2
